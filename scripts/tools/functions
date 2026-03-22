@@ -28,3 +28,8 @@ function copy_to_clipboard_and_notify() {
 function get_temp_dir() {
     echo "${XDG_RUNTIME_DIR:-/tmp}"
 }
+
+function get_temp_file_named() {
+  local name=$1
+  echo "$(get_temp_dir)/${name}_$(id -u)"
+}

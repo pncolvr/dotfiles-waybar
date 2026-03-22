@@ -4,8 +4,7 @@ TOOlS=$(echo "$0" | xargs realpath | xargs dirname)/tools/functions
 # shellcheck source=/home/pncolvr/.config/waybar/scripts/tools/functions
 source "$TOOlS"
 
-TEMP_DIR="$(get_temp_dir)"
-
+ONLINE_FILE="$(get_temp_file_named twitch_online)"
 # generate new twitch token with twitch-cli token
 # expand followed section on twitch
 # and after on dev tools
@@ -49,14 +48,14 @@ users=(
 )
 
 json=$(twitch-cli api get "streams?$(printf 'user_login=%s&' "${users[@]}")")
-online_file="$TEMP_DIR/twitch_online"
+
 online_previous=""
-if [[ -f "$online_file" ]]; then
-    online_previous=$(<"$online_file")
+if [[ -f "$ONLINE_FILE" ]]; then
+    online_previous=$(<"$ONLINE_FILE")
 fi
 
 show=false
-true > "$online_file"
+true > "$ONLINE_FILE"
 for user in "${users[@]}"; do
     if echo "$json" | jq -e --arg u "$user" '.data[] | select(.user_login == $u)' >/dev/null 2>&1; then
         viewer_count=$(echo "$json" | jq -e --arg u "$user" '.data[] | select(.user_login == $u) | .viewer_count')
@@ -65,7 +64,7 @@ for user in "${users[@]}"; do
             notification+="$user\n"
         fi
         show=true
-        printf '"%s"="%s"\n' "$user" "https://www.twitch.tv/$user" >> "$online_file"
+        printf '"%s"="%s"\n' "$user" "https://www.twitch.tv/$user" >> "$ONLINE_FILE"
     else
         offline+=$(printf '<span %s>%s</span>\r' 'foreground="#FFFFFF"' "$user")
     fi
