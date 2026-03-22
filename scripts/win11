@@ -10,11 +10,11 @@ source "$HOME"/Projects/scripts/rofi/remotes/serverup.sh
 machine="win11"
 port=3389
 endpoint=192.168.122.198
-TEMP_DIR="${XDG_RUNTIME_DIR:-${TMPDIR:-/tmp}}"
+TEMP_DIR="$(get_temp_dir)"
 
 FILE_TO_WATCH="$TEMP_DIR/${machine}_status"
 
-function recreateFile() {
+function recreate_file() {
     if [ ! -f "$FILE_TO_WATCH" ]; then
         touch "$FILE_TO_WATCH"
     fi
@@ -41,14 +41,14 @@ function check() {
 }
 
 function monitor(){
-    recreateFile
+    recreate_file
     check
     while true; do
         if inotifywait -q -t 15 -e modify,delete,move "$FILE_TO_WATCH" > /dev/null 2>&1; then
-            recreateFile
+            recreate_file
             check
         else
-            recreateFile
+            recreate_file
             check
         fi
     done
@@ -67,7 +67,7 @@ function focus() {
 }
 
 case $1 in
-    monitor)monitor;;
-    toggle) toggle;;
-    focus) focus;;
+    monitor) monitor;;
+    toggle)  toggle;;
+    focus)   focus;;
 esac

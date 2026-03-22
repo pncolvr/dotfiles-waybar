@@ -3,4 +3,4 @@ TOOLS="$(echo "$0" | xargs realpath | xargs dirname)"/tools
 source "$TOOLS"/functions
 
 id=$("$TOOLS"/genptvatid.cs)
-copy-to-clipboard-and-notify "$id"
+copy_to_clipboard_and_notify "$id"

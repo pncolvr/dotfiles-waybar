@@ -4,7 +4,7 @@ TOOlS=$(echo "$0" | xargs realpath | xargs dirname)/tools/functions
 # shellcheck source=/home/pncolvr/.config/waybar/scripts/tools/functions
 source "$TOOlS"
 
-TEMP_DIR="${XDG_RUNTIME_DIR:-${TMPDIR:-/tmp}}"
+TEMP_DIR="$(get_temp_dir)"
 
 # generate new twitch token with twitch-cli token
 # expand followed section on twitch
@@ -79,9 +79,7 @@ if [[ $show == true ]]; then
         title="Online"
         notify-send --icon "$HOME"/Pictures/icons/twitch.png "$title" "$notification" --transient
     fi
-    # respondWithIcon "" "" "$tooltip" ""
-    respondWithIcon "" "" "$tooltip" ""
-    # respondWithIcon "" "" "$tooltip" ""
+    respond_with_icon "" "" "$tooltip" ""
 else
-    respondWithIcon "" "" "$tooltip" "disabled"
+    respond_with_icon "" "" "$tooltip" "disabled"
 fi

@@ -6,7 +6,7 @@ TOOlS=$(echo "$0" | xargs realpath | xargs dirname)/tools/functions
 source "$TOOlS"
 
 function toggle() {
-    ALL_MUTED=$(micIsMuted)
+    ALL_MUTED=$(mic_is_muted)
     if [ "$ALL_MUTED" = true ]; then
         for SRC in $SOURCE_IDS; do
             wpctl set-mute "$SRC" 0
@@ -20,15 +20,15 @@ function toggle() {
 }
 
 function status() {
-    ALL_MUTED=$(micIsMuted)
+    ALL_MUTED=$(mic_is_muted)
     if [ "$ALL_MUTED" = true ]; then
-        respondWithIcon ""
+        respond_with_icon ""
     else
-        respondWithIcon ""
+        respond_with_icon ""
     fi
 }
 
-function micIsMuted() {
+function mic_is_muted() {
     ALL_MUTED=true
     for SRC in $SOURCE_IDS; do
         if ! wpctl get-volume "$SRC" | grep -q "MUTED"; then

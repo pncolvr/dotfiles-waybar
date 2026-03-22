@@ -10,7 +10,7 @@ source "$TOOLS"
 if hyprctl activewindow 2>/dev/null | grep -q 'pid'; then
     current=$(hyprctl getprop activewindow no_screen_share 2>/dev/null)
     if [[ "$current" == "true" ]]; then
-        respondWithIcon ""
+        respond_with_icon ""
     fi
 fi
 

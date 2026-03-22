@@ -51,7 +51,7 @@ if [ "$count" -gt 0 ]; then
     fi
 
     class=$([[ $has_priority_update == true ]] && echo "priority" || echo "")
-    respondWithIcon "" "" "$tooltip" "$class"
+    respond_with_icon "" "" "$tooltip" "$class"
 else 
-    respondWithIcon "" "" "" "disabled"
+    respond_with_icon "" "" "" "disabled"
 fi

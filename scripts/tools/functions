@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-function respondWithIcon() {
+function respond_with_icon() {
     local icon="$1"
     local text="$2"
     local tooltip="$3"
@@ -16,19 +16,15 @@ function respond() {
     local tooltip="$2"
     local class="$3"
 
-    respondWithIcon "" "$text" "$tooltip" "$class"
+    respond_with_icon "" "$text" "$tooltip" "$class"
 }
 
-function is-port-open () {
-    local host=$1
-    local port=$2
-    local timeout_secs=1
-
-    nc -z -w "$timeout_secs" "$host" "$port" >/dev/null 2>&1 && echo Open || echo Closed
-}
-
-function copy-to-clipboard-and-notify() {
+function copy_to_clipboard_and_notify() {
     local text="$1"
     notify-send --expire-time=2000 "$text copied to clipboard" --transient
     echo -n "$text" | wl-copy
+}
+
+function get_temp_dir() {
+    echo "${XDG_RUNTIME_DIR:-/tmp}"
 }

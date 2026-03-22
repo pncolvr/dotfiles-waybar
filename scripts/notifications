@@ -11,9 +11,9 @@ function is_dnd_enabled() {
 
 function status() {
     if is_dnd_enabled; then
-        respondWithIcon "" "" "DND enabled" ""
+        respond_with_icon "" "" "DND enabled" ""
     else 
-        respondWithIcon "" "" "DND disabled" ""
+        respond_with_icon "" "" "DND disabled" ""
     fi
 }
 
@@ -27,12 +27,12 @@ function toggle(){
     fi
 }
 
-function open-panel() {
+function open_panel() {
     swaync-client --open-panel
 }
 
 case $1 in
     status) status ;;
-    open-panel) open-panel;;
+    open-panel) open_panel;;
     toggle) toggle;;
 esac
