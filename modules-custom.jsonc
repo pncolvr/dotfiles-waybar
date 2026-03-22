@@ -125,12 +125,6 @@
         "interval": "once",
         "tooltip": false
     },
-    "custom/tolocalplayer": {
-        "exec": "$HOME/.config/waybar/scripts/tolocalplayer",
-        "on-click": "hyprctl dispatch workspace 2",
-        "on-click-right": "hyprctl dismissnotify",
-        "return-type":"json"
-    },
     "custom/mic": {
         "exec": "$HOME/.config/waybar/scripts/mic status",
         "on-click": "$HOME/.config/waybar/scripts/mic toggle",
