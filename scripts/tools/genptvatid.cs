@@ -23,7 +23,7 @@ string GenerateUniqueVatId()
 
 int CalculateCheckDigit(string value)
 {
-    int controlSum = 9 * int.Parse(value.Substring(0, 1)) +
+    int controlSum = 9 * int.Parse(value[..1]) +
                     8 * int.Parse(value.Substring(1, 1)) +
                     7 * int.Parse(value.Substring(2, 1)) +
                     6 * int.Parse(value.Substring(3, 1)) +

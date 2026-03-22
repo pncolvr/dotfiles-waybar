@@ -72,15 +72,9 @@ tooltip {
   color: #A970FF;
 }
 
-#custom-n8nproxy,
-#custom-sql,
 #custom-uxplay,
 #custom-separator {
   color: @inactive;
-}
-
-#custom-pullrequests {
-  color: #58a6ff;
 }
 
 #custom-screencast {
@@ -97,7 +91,6 @@ tooltip {
 }
 
 #custom-windows.single,
-#custom-mpvtimeleft,
 #custom-activewindowhidden,
 #custom-activewindowfullscreen {
   color: @accent;
@@ -119,9 +112,7 @@ tooltip {
 #custom-screencast,
 #custom-media.playing,
 #custom-win11.booted,
-#custom-n8nproxy.enabled,
-#custom-uxplay.enabled,
-#custom-sql.enabled {
+#custom-uxplay.enabled {
   animation: pulseActiveColor 2s ease-in-out infinite;
   animation-timing-function: steps(30);
 }

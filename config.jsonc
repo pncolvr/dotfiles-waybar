@@ -19,29 +19,20 @@
     "custom/windows",
     "custom/activewindowhidden",
     "custom/activewindowfullscreen"
-    // ,
-    // "custom/mpvtimeleft"
   ],
   "modules-center": [
     "custom/updates",
     "custom/separator",
     "clock",
     "custom/separator",
-    // "custom/tolocalplayer",
     "custom/twitch"
   ],
   "modules-right": [
     "custom/screencast",
-    // "custom/media#mpd",
-    // "custom/separator",
     "custom/mic",
     "group/pulseaudio",
     "group/scripts",
-    // "group/monitor",
-    // "group/work",
-    // "group/apps",
     "group/tray",
     "custom/notifications"
-    // "custom/notifications"
   ]
 }

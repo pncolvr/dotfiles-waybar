@@ -16,9 +16,6 @@
             "custom/ocr",
             "custom/uxplay",
             "custom/win11"
-            // "custom/pullrequests"
-            // "custom/n8nproxy",
-            // "custom/sql"
         ]
     },
     "group/tray": {
@@ -55,8 +52,7 @@
         },
         "modules": [
             "custom/work-toggle",
-            "custom/win11",
-            "custom/pullrequests"
+            "custom/win11"
         ]
     },
     "group/pulseaudio": {

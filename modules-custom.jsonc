@@ -57,14 +57,6 @@
         "on-click": "$HOME/Projects/scripts/utils/hyprland/screen/shot.sh qrcode",
         "tooltip-format": "read qrcode"
     },
-    "custom/weather": {
-        "format": "{}°",
-        "tooltip": true,
-        "interval": 3600,
-        // "exec": "wttrbar --location Leiria --hide-conditions --lang pt",
-        "exec": "wttrbar --location Fatima --hide-conditions --lang pt",
-        "return-type": "json"
-    },
     "custom/updates": {
         "format": "{text}",
         "exec": "$HOME/.config/waybar/scripts/updates",
@@ -72,16 +64,6 @@
         "interval": 3600,
         "markup":"pango",
         "return-type": "json"
-    },
-    "custom/media#mpd": {
-        "format": "{text}",
-        "exec": "$HOME/.config/waybar/scripts/media mpd",
-        "return-type": "json",
-        "markup": "pango",
-        "on-click": "playerctl play-pause",
-        "on-scroll-up": "playerctl next",
-        "on-scroll-down": "playerctl previous",
-        "tooltip":true
     },
     "custom/screencast": {
         "format": "{text}",
@@ -96,14 +78,6 @@
         "on-click-right": "$HOME/.config/waybar/scripts/win11 toggle",
         "return-type": "json",
         "markup": "pango"
-    },
-    "custom/pullrequests": {
-        "exec": "$HOME/.config/waybar/scripts/pullrequests update",
-        "on-click": "$HOME/.config/waybar/scripts/pullrequests open",
-        "interval": 3600,
-        "return-type": "json",
-        "markup":"pango",
-        "tooltip": true
     },
     "custom/windows": {
         "format":"{text}",
@@ -132,18 +106,6 @@
         "tooltip":false,
         "signal": 1
     },
-    "custom/n8nproxy": {
-        "exec-on-event": true,
-        "interval": 600,
-        "return-type": "json",
-        "exec": "$HOME/.config/waybar/scripts/n8nproxy status"
-    },
-    "custom/sql": {
-        "exec-on-event": true,
-        "interval": 600,
-        "return-type": "json",
-        "exec": "$HOME/.config/waybar/scripts/sql status"
-    },
     "custom/notifications": {
         "exec": "$HOME/.config/waybar/scripts/notifications status",
         "on-click": "$HOME/.config/waybar/scripts/notifications open-panel",
@@ -157,10 +119,6 @@
         "on-click": "$HOME/Projects/scripts/utils/browser/tolocalplayer.sh",
         "return-type":"json",
         "interval": 300
-    },
-    "custom/mpvtimeleft": {
-        "exec": "$HOME/.config/waybar/scripts/mpvtimeleft",
-        "interval": 1
     },
     "custom/separator": {
         "format": "·",
