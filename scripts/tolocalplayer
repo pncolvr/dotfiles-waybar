@@ -27,12 +27,7 @@ function check() {
         lastlines=$(tail -n 30 "$FILE_TO_WATCH")
         respondWithIcon "" "" "$lastlines" "playing"
     else
-        # if [[ "$(isRunning)" == true ]]; then
-        #     respondWithIcon "" "" "" "playing"
-        # else
-            # shellcheck disable=2119
-            respond
-        # fi
+        respond
     fi
 }
 

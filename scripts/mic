@@ -39,11 +39,6 @@ function micIsMuted() {
     echo "$ALL_MUTED"
 }
 
-# if [ -z "$SOURCE_IDS" ]; then
-#     respondWithIcon ""
-#     exit 1
-# fi
-
 SOURCE_IDS=$(wpctl status | awk '/Sources:/,/Sinks:/' | grep 'PRO X 2 LIGHTSPEED Mono' | grep '^\s*│  \*' | awk '{print $3}' | tr -d '.')
 case $1 in 
     toggle) toggle;;

@@ -4,5 +4,4 @@ TOOlS=$(echo "$0" | xargs realpath | xargs dirname)/tools/functions
 source "$TOOlS"
 
 id=$(uuidgen)
-
 copy-to-clipboard-and-notify "$id"

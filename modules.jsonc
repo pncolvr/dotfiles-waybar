@@ -43,11 +43,20 @@
         "tooltip-format": "{volume}%"
     },
     "pulseaudio": {
-        "tooltip":false
+        "tooltip": false
     },
     "cpu": {
         "format": "{icon0} {icon1} {icon2} {icon3} {icon4} {icon5} {icon6} {icon7}",
-        "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"]
+        "format-icons": [
+            "▁",
+            "▂",
+            "▃",
+            "▄",
+            "▅",
+            "▆",
+            "▇",
+            "█"
+        ]
     },
     "memory": {
         "interval": 30,
@@ -62,6 +71,6 @@
             "performance": "",
             "balanced": "",
             "power-saver": ""
+        }
     }
-}
 }

@@ -1,5 +1,4 @@
 {
-  // criar ficheiro base e dois por monitor, cada um desses inclui o base e altera os modulos que faz display
   "include": [
     "$HOME/.config/waybar/groups.jsonc",
     "$HOME/.config/waybar/modules.jsonc",
