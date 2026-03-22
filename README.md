@@ -6,7 +6,7 @@ This is my personal daily driver waybar configuration that I use for personal an
 I use this repo as a git submodule on my dotfiles.  
 The following command is isued on the dotfiles repo, to have this one as a submodule.
 ```shell
-git submodule add git@github.com:pncolvr/waybar.git .config/waybar
+git submodule add git@github.com:pncolvr/dotfiles-waybar.git .config/waybar
 ```
 
 ## When cloning a "parent repo" to include the submodules
