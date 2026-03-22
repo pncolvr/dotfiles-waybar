@@ -5,36 +5,36 @@ TOOLS=$(dirname "$(dirname "$(realpath "$0")")")/tools/functions
 # shellcheck source=/home/pncolvr/.config/waybar/scripts/tools/functions
 source "$TOOLS"
 
-function getActiveWindowJson() {
+function get_active_window_json() {
     hyprctl activewindow -j 2>/dev/null
 }
 
-function getActiveWindowAddress() {
-    getActiveWindowJson | jq -r '.address // empty'
+function get_active_window_address() {
+    get_active_window_json | jq -r '.address // empty'
 }
 
-function getActiveWorkspace() {
+function get_active_workspace() {
     hyprctl activeworkspace -j | jq --raw-output '.id'
 }
 
-function getCursorNoWarps() {
+function get_cursor_no_warps() {
     hyprctl getoption cursor:no_warps -j 2>/dev/null | jq -r '.int // 0'
 }
 
-function setCursorNoWarps() {
+function set_cursor_no_warps() {
     hyprctl keyword cursor:no_warps "$1" >/dev/null
 }
 
-function isSpecialWorkspace() {
+function is_special_workspace() {
     case $1 in
         3|4|10) return 0;;
         *) return 1;;
     esac
 }
 
-function getCleanTitle() {
+function get_clean_title() {
     patterns=("- Vivaldi" "- qutebrowser" "- FreeTube" "- YouTube" "- Google Search" "- Twitch" "- Microsoft Azure")
-    text=$(getActiveWindowJson | jq -r '.title')
+    text=$(get_active_window_json | jq -r '.title')
     for pat in "${patterns[@]}"; do
         if [[ $text == *" $pat" ]]; then
             text="${text%" $pat"}"
@@ -43,40 +43,40 @@ function getCleanTitle() {
     echo "${text:0:165}"
 }
 
-function escapePango() {
+function escape_pango() {
     sed -e 's/&/\&amp;/g' -e 's/</\&lt;/g' -e 's/>/\&gt;/g'
 }
 
-function getInfo() {
+function get_info() {
     hyprctl activewindow 2>/dev/null
 }
 
-function copyInfo() {
-    wl-copy "$(getInfo)"
+function copy_info() {
+    wl-copy "$(get_info)"
 }
 
-function handleAction() {
+function handle_action() {
     local ws="$1"
     local class=""
     local clients=""
     case $ws in 
         3|4|10)
-            clients=$(listWindows "$1")
+            clients=$(list_windows "$1")
             class="workspace-$ws"
             ;;
         *)
-            clients=$(getCleanTitle)
+            clients=$(get_clean_title)
             class="single";;
     esac 
     if [[ $clients == "null" ]]; then
         clients=""
     fi
     local tooltip
-    tooltip=$(getInfo)
+    tooltip=$(get_info)
     respond "$clients" "$tooltip" "$class"
 }
 
-function getOrderedWindows() {
+function get_ordered_windows() {
     local ws="$1"
     local -a clients
     local -a processed_clients
@@ -90,7 +90,7 @@ function getOrderedWindows() {
     for client in "${clients[@]}"; do
         [[ -z "$client" ]] && continue
         IFS="|" read -r address class title <<< "$client"
-        display_title=$(handleTitle "$ws" "$title" "$class")
+        display_title=$(handle_title "$ws" "$title" "$class")
         processed_clients+=("$display_title|$address|$class|$title")
     done
 
@@ -101,15 +101,15 @@ function getOrderedWindows() {
     printf '%s\n' "${processed_clients[@]}" | sort -t '|' -k1,1
 }
 
-function listWindows() {
+function list_windows() {
     local ws="$1"
     local current_address
     local -a sorted_clients
     local spans=""
     local client display_title address class title
 
-    current_address=$(getActiveWindowAddress)
-    mapfile -t sorted_clients < <(getOrderedWindows "$ws")
+    current_address=$(get_active_window_address)
+    mapfile -t sorted_clients < <(get_ordered_windows "$ws")
 
     for client in "${sorted_clients[@]}"; do
         [[ -z "$client" ]] && continue
@@ -117,22 +117,22 @@ function listWindows() {
         if [[ ! $spans == "" ]]; then
             spans+="<span>∣ </span>"
         fi
-        spans+=$(echo -n "<span $(handleSelected "$address" "$current_address")>$display_title</span> ")
+        spans+=$(echo -n "<span $(handle_selected "$address" "$current_address")>$display_title</span> ")
     done
     spans="${spans% }" # why? because i dont know css well enough
     echo "$spans"
 }
 
-function handleSelected() {
+function handle_selected() {
     local window=$1
-    local current="${2:-$(getActiveWindowAddress)}"
+    local current="${2:-$(get_active_window_address)}"
 
     if [[ "$current" == "$window" ]]; then
         echo 'foreground="#6272a4"'
     fi
 }
 
-function orderedWindowsContainAddress() {
+function ordered_windows_contains_address() {
     local target="$1"
     local client address
     shift
@@ -147,7 +147,7 @@ function orderedWindowsContainAddress() {
     return 1
 }
 
-function getNextOrderedWindowAddress() {
+function get_next_ordered_window_address() {
     local reference_address="$1"
     shift
 
@@ -184,7 +184,7 @@ function getNextOrderedWindowAddress() {
     echo "$address"
 }
 
-function getPrevOrderedWindowAddress() {
+function get_prev_ordered_window_address() {
     local reference_address="$1"
     shift
 
@@ -221,73 +221,73 @@ function getPrevOrderedWindowAddress() {
     echo "$address"
 }
 
-function getSpecialWorkspaceReferenceAddress() {
+function get_special_workspace_reference_address() {
     local active_address="$1"
     shift
 
     local -a ordered_windows=("$@")
 
-    if orderedWindowsContainAddress "$active_address" "${ordered_windows[@]}"; then
+    if ordered_windows_contains_address "$active_address" "${ordered_windows[@]}"; then
         echo "$active_address"
         return 0
     fi
 }
 
-function moveNextSpecialWorkspaceWindow() {
+function move_next_special_workspace_window() {
     local ws="$1"
     local current_address reference_address next_address
     local -a ordered_windows
 
-    current_address=$(getActiveWindowAddress)
-    mapfile -t ordered_windows < <(getOrderedWindows "$ws")
+    current_address=$(get_active_window_address)
+    mapfile -t ordered_windows < <(get_ordered_windows "$ws")
 
     if [[ ${#ordered_windows[@]} -eq 0 ]]; then
         return 0
     fi
 
-    reference_address=$(getSpecialWorkspaceReferenceAddress "$current_address" "${ordered_windows[@]}")
-    next_address=$(getNextOrderedWindowAddress "$reference_address" "${ordered_windows[@]}")
+    reference_address=$(get_special_workspace_reference_address "$current_address" "${ordered_windows[@]}")
+    next_address=$(get_next_ordered_window_address "$reference_address" "${ordered_windows[@]}")
 
     [[ -z "$next_address" ]] && return 0
 
     hyprctl dispatch focuswindow "address:$next_address" >/dev/null
 }
 
-function movePrevSpecialWorkspaceWindow() {
+function move_prev_special_workspace_window() {
     local ws="$1"
     local current_address reference_address prev_address
     local -a ordered_windows
 
-    current_address=$(getActiveWindowAddress)
-    mapfile -t ordered_windows < <(getOrderedWindows "$ws")
+    current_address=$(get_active_window_address)
+    mapfile -t ordered_windows < <(get_ordered_windows "$ws")
 
     if [[ ${#ordered_windows[@]} -eq 0 ]]; then
         return 0
     fi
 
-    reference_address=$(getSpecialWorkspaceReferenceAddress "$current_address" "${ordered_windows[@]}")
-    prev_address=$(getPrevOrderedWindowAddress "$reference_address" "${ordered_windows[@]}")
+    reference_address=$(get_special_workspace_reference_address "$current_address" "${ordered_windows[@]}")
+    prev_address=$(get_prev_ordered_window_address "$reference_address" "${ordered_windows[@]}")
 
     [[ -z "$prev_address" ]] && return 0
 
     hyprctl dispatch focuswindow "address:$prev_address" >/dev/null
 }
 
-function activeWindowHasGroup() {
-    getActiveWindowJson | jq -e '(.grouped // []) | length > 1' >/dev/null
+function active_window_has_group() {
+    get_active_window_json | jq -e '(.grouped // []) | length > 1' >/dev/null
 }
 
-function handleMoveNext() {
+function handle_move_next() {
     local ws
 
-    ws=$(getActiveWorkspace)
+    ws=$(get_active_workspace)
 
-    if isSpecialWorkspace "$ws"; then
-        moveNextSpecialWorkspaceWindow "$ws"
+    if is_special_workspace "$ws"; then
+        move_next_special_workspace_window "$ws"
         return 0
     fi
 
-    if activeWindowHasGroup; then
+    if active_window_has_group; then
         hyprctl dispatch changegroupactive f >/dev/null
         return 0
     fi
@@ -295,32 +295,32 @@ function handleMoveNext() {
     hyprctl dispatch cyclenext tiled >/dev/null
 }
 
-function moveNext() {
+function move_next() {
     local original_no_warps
     local status
 
-    original_no_warps=$(getCursorNoWarps)
-    setCursorNoWarps 1
+    original_no_warps=$(get_cursor_no_warps)
+    set_cursor_no_warps 1
 
-    handleMoveNext
+    handle_move_next
     status=$?
 
-    setCursorNoWarps "$original_no_warps"
+    set_cursor_no_warps "$original_no_warps"
 
     return $status
 }
 
-function handleMovePrev() {
+function handle_move_prev() {
     local ws
 
-    ws=$(getActiveWorkspace)
+    ws=$(get_active_workspace)
 
-    if isSpecialWorkspace "$ws"; then
-        movePrevSpecialWorkspaceWindow "$ws"
+    if is_special_workspace "$ws"; then
+        move_prev_special_workspace_window "$ws"
         return 0
     fi
 
-    if activeWindowHasGroup; then
+    if active_window_has_group; then
         hyprctl dispatch changegroupactive b >/dev/null
         return 0
     fi
@@ -328,35 +328,35 @@ function handleMovePrev() {
     hyprctl dispatch cyclenext prev tiled >/dev/null
 }
 
-function movePrev() {
+function move_prev() {
     local original_no_warps
     local status
 
-    original_no_warps=$(getCursorNoWarps)
-    setCursorNoWarps 1
+    original_no_warps=$(get_cursor_no_warps)
+    set_cursor_no_warps 1
 
-    handleMovePrev
+    handle_move_prev
     status=$?
 
-    setCursorNoWarps "$original_no_warps"
+    set_cursor_no_warps "$original_no_warps"
 
     return $status
 }
 
-function handleTitle() {
+function handle_title() {
     ws=$1
-    windowTitle=$2
+    window_title=$2
     class=$3
     case $ws in
-        3) handleWorkspace3Title "$class" "$windowTitle";;
-        4) handleWorkspace4Title "$class" "$windowTitle";;
-        10) echo "$windowTitle";;
+        3) handle_workspace3_title "$class" "$window_title";;
+        4) handle_workspace4_title "$class" "$window_title";;
+        10) echo "$window_title";;
     esac
 }
 
-function handleWorkspace3Title(){
+function handle_workspace3_title(){
     class=$1
-    windowTitle=$2
+    window_title=$2
     if [[ "$class" == "vivaldi-teams.microsoft.com__v2_-lt" ]]; then
         echo "teams"
     else
@@ -364,24 +364,24 @@ function handleWorkspace3Title(){
     fi
 }
 
-function handleWorkspace4Title(){
+function handle_workspace4_title(){
     class=$1
-    windowTitle=$2
+    window_title=$2
     if [[ "$class" == "code" ]]; then
-        echo "${windowTitle%%-*}"
+        echo "${window_title%%-*}"
     else
-        echo "$windowTitle"
+        echo "$window_title"
     fi
 }
 
-function handleEvent() {
-    ws=$(getActiveWorkspace)
-    handleAction "$ws"
+function handle_event() {
+    ws=$(get_active_workspace)
+    handle_action "$ws"
 }
 
 case $1 in 
-    list) handleEvent;;
-    copy) copyInfo;;
-    move-next) moveNext;;
-    move-previous) movePrev;;
+    list) handle_event;;
+    copy) copy_info;;
+    move-next) move_next;;
+    move-previous) move_prev;;
 esac
