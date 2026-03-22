@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+TOOlS=$(echo "$0" | xargs realpath | xargs dirname)/tools/functions
+# shellcheck source=/home/pncolvr/.config/waybar/scripts/tools/functions
+source "$TOOlS"
+
+TEMP_DIR="${XDG_RUNTIME_DIR:-${TMPDIR:-/tmp}}"
+FILE_TO_WATCH="$TEMP_DIR/screencast_status"
+
+if [[ ! -f "$FILE_TO_WATCH" ]]; then
+    echo 0 > "$FILE_TO_WATCH"
+fi
+
+function check() {
+    STATUS=$(cat $FILE_TO_WATCH)
+    case $STATUS in
+        1) onScreencast ;;
+        *) onNoScreencast;;
+    esac
+}
+
+function onNoScreencast() {
+    # updateSwayNcConfig right
+    # swaync-client ---change-noti-monitor DP-1 > /dev/null 2>&1
+    # swaync-client --dnd-off > /dev/null 2>&1
+    respond
+}
+
+function onScreencast() {
+    # updateSwayNcConfig left
+    # swaync-client ---change-noti-monitor HDMI-A-1 > /dev/null 2>&1
+    # swaync-client --dnd-on > /dev/null 2>&1
+    respond "" "screensharing"
+}
+
+# function updateSwayNcConfig() {
+#     CONFIG_PATH="$HOME/.config/swaync/config.json"
+#     tmpfile=$(mktemp)
+#     jq --arg pos "$1" '.positionX = $pos' "$CONFIG_PATH" > "$tmpfile" && mv "$tmpfile" "$CONFIG_PATH" > /dev/null 2>&1
+#     swaync-client --reload-config > /dev/null 2>&1
+# #     pkill swaync > /dev/null 2>&1
+# #     swaync & disown > /dev/null 2>&1
+# }
+
+check
+while true; do
+    inotifywait -m -e modify,delete,move "$FILE_TO_WATCH" 2>/dev/null | while read -r _; do
+        check
+    done
+done

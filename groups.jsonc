@@ -1,0 +1,74 @@
+{
+    "group/scripts": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 100,
+            "children-class": "custom-scripts",
+            "transition-left-to-right": true
+        },
+        "modules": [
+            "custom/scripts-toggle",
+            "custom/colorpicker",
+            "custom/uuidgen",
+            "custom/currentdate",
+            "custom/genptvatid",
+            "custom/qrcode",
+            "custom/ocr",
+            "custom/uxplay",
+            "custom/win11"
+            // "custom/pullrequests"
+            // "custom/n8nproxy",
+            // "custom/sql"
+        ]
+    },
+    "group/tray": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 100,
+            "children-class": "custom-tray",
+            "transition-left-to-right": true
+        },
+        "modules": [
+            "custom/tray-toggle",
+            "tray"
+        ]
+    },
+    "group/apps": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 100,
+            "children-class": "custom-apps",
+            "transition-left-to-right": true
+        },
+        "modules": [
+            "custom/apps-toggle",
+            "custom/discord",
+            "custom/teams"
+        ]
+    },
+    "group/work": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 100,
+            "children-class": "custom-work",
+            "transition-left-to-right": true
+        },
+        "modules": [
+            "custom/work-toggle",
+            "custom/win11",
+            "custom/pullrequests"
+        ]
+    },
+    "group/pulseaudio": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 100,
+            "children-class": "custom-pulseaudio",
+            "transition-left-to-right": true
+        },
+        "modules": [
+            "pulseaudio/slider",
+            "pulseaudio"
+        ]
+    }
+}

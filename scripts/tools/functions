@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+function respondWithIcon() {
+    local icon="$1"
+    local text="$2"
+    local tooltip="$3"
+    local class="$4"
+    if [[ -n "$icon" ]]; then
+        text="<span font='Font Awesome 7 Free'>$icon</span>$text"
+    fi
+    jq -cn --arg text "$text" --arg tooltip "$tooltip" --arg class "$class" '({text:$text, tooltip:$tooltip, class:$class} | with_entries(select(.value != null and .value != "")))'
+}
+
+function respond() {
+    local text="$1"
+    local tooltip="$2"
+    local class="$3"
+
+    respondWithIcon "" "$text" "$tooltip" "$class"
+}
+
+function is-port-open () {
+    local host=$1
+    local port=$2
+    local timeout_secs=1
+
+    nc -z -w "$timeout_secs" "$host" "$port" >/dev/null 2>&1 && echo Open || echo Closed
+}
+
+function copy-to-clipboard-and-notify() {
+    local text="$1"
+    notify-send --expire-time=2000 "$text copied to clipboard" --transient
+    echo -n "$text" | wl-copy
+}

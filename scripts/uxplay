@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+TOOlS=$(echo "$0" | xargs realpath | xargs dirname)/tools/functions
+# shellcheck source=/home/pncolvr/.config/waybar/scripts/tools/functions
+. "$TOOlS"
+
+isRunning() {
+    sleep 1
+    pgrep -x uxplay >/dev/null && echo "running" || echo "not running"
+}
+
+toggle() {
+    if test "$(isRunning)" = "running"
+    then
+        killall uxplay & disown
+    else
+        nohup uxplay -p -n "NotAnApple" >/dev/null &
+    fi
+}
+
+status() {
+    if test "$(isRunning)" = "running" 
+    then
+        respond "" "" "enabled"
+    else
+        respond ""
+    fi
+}
+
+case $1 in 
+    "status")status;;
+    "toggle")toggle;;
+esac

@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# reload waybar with: pkill -SIGUSR2 waybar
+# reload this module with: pkill -RTMIN+2 waybar
+TOOlS=$(echo "$0" | xargs realpath | xargs dirname)/tools/functions
+# shellcheck source=/home/pncolvr/.config/waybar/scripts/tools/functions
+. "$TOOlS"
+
+function status() {
+    if [[ "$(is-port-open 51.138.238.225 22)" == "Open" ]]; then
+        respondWithIcon "" "" "n8n proxy active" "enabled"
+    else
+        respondWithIcon "" "" "n8n proxy inactive"
+    fi
+}
+
+case $1 in 
+    "status") status;;
+esac

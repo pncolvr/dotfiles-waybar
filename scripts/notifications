@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# reload waybar with: pkill -SIGUSR2 waybar
+# reload this module with: pkill -RTMIN+2 waybar
+TOOlS=$(echo "$0" | xargs realpath | xargs dirname)/tools/functions
+# shellcheck source=/home/pncolvr/.config/waybar/scripts/tools/functions
+source "$TOOlS"
+
+function is_dnd_enabled() {
+    [[ "$(swaync-client --get-dnd)" == "true" ]]
+}
+
+function status() {
+    if is_dnd_enabled; then
+        respondWithIcon "" "" "DND enabled" ""
+    else 
+        respondWithIcon "" "" "DND disabled" ""
+    fi
+}
+
+function toggle(){
+    swaync-client --toggle-dnd
+    pkill -RTMIN+2 waybar
+    if is_dnd_enabled; then
+        hyprctl notify -1 1000 "rgb(2E7D32)" "notifications disabled" > /dev/null 2>&1
+    else 
+        hyprctl notify -1 1000 "rgb(2E7D32)" "notifications enabled" > /dev/null 2>&1
+    fi
+}
+
+function open-panel() {
+    swaync-client --open-panel
+}
+
+case $1 in
+    status) status ;;
+    open-panel) open-panel;;
+    toggle) toggle;;
+esac

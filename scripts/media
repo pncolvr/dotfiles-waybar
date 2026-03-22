@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+TOOlS=$(echo "$0" | xargs realpath | xargs dirname)/tools/functions
+# shellcheck source=/home/pncolvr/.config/waybar/scripts/tools/functions
+. "$TOOlS"
+
+proposed="$1"
+player=$(playerctl --list-all | grep "$proposed")
+if [[ -n "$player" ]]; then 
+    respond ""
+fi
+playerctl --player="$player" metadata --follow \
+  --format '{{status}}: {{title}} - {{artist}}' | while read -r line; do
+    STATUS=$(echo "$line" | cut -d: -f1)
+    INFO=$(echo "$line" | cut -d: -f2- | escape_pango)
+
+    case "$STATUS" in
+        Playing) class="playing";;
+        Paused)  class="paused";;
+        # Stopped|No*)echo "";;
+        *) class="";;
+    esac
+    displayInfo="$(printf '%s' "$INFO" | cut -c -40)"
+    if [[ -n "$class" ]]; then
+        case "$class" in
+            playing)icon="";;
+            paused) icon="" ;;
+        esac
+        respondWithIcon "$icon" "$displayInfo" "$INFO" "$class"
+    else 
+        echo
+    fi
+    
+done

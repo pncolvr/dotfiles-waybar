@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+
+TOOlS=$(echo "$0" | xargs realpath | xargs dirname)/tools/functions
+# shellcheck source=/home/pncolvr/.config/waybar/scripts/tools/functions
+source "$TOOlS"
+
+# shellcheck source=/home/pncolvr/Projects/scripts/rofi/remotes/serverup.sh
+source "$HOME"/Projects/scripts/rofi/remotes/serverup.sh
+
+machine="win11"
+port=3389
+endpoint=192.168.122.198
+TEMP_DIR="${XDG_RUNTIME_DIR:-${TMPDIR:-/tmp}}"
+
+FILE_TO_WATCH="$TEMP_DIR/${machine}_status"
+
+function recreateFile() {
+    if [ ! -f "$FILE_TO_WATCH" ]; then
+        touch "$FILE_TO_WATCH"
+    fi
+}
+
+function check() {
+    virshStatus=$(virsh -c qemu:///system list | grep "$machine" | awk '{ print $3 }')
+    if [[ "$virshStatus" == "running" ]]; then
+        STATUS=$(cat $FILE_TO_WATCH)
+        case $STATUS in 
+            booting) respond "" "$machine booting" "booting";;
+            booted) respond "" "$machine booted" "booted";;
+            stopping) respond "" "$machine stopping" "stopping";;
+            error) respond "" "$machine couldnt connect" "error";;
+            *) respond "" "$machine stopped" "stopped";;
+        esac
+    else
+        status=$(cat "$FILE_TO_WATCH")
+        if [[ ! "$status" == "stopped" ]]; then
+            echo "stopped" >  "$FILE_TO_WATCH"
+            respond "" "$machine stopped" "stopped"
+        fi
+    fi
+}
+
+function monitor(){
+    recreateFile
+    check
+    while true; do
+        if inotifywait -q -t 15 -e modify,delete,move "$FILE_TO_WATCH" > /dev/null 2>&1; then
+            recreateFile
+            check
+        else
+            recreateFile
+            check
+        fi
+    done
+}
+
+function toggle() {
+    status=$(toggleVirtualMachine "$machine")
+    [[ $status == "starting" ]] && monitorVirtualMachine "$endpoint" "$port" "$machine"
+}
+
+function focus() {
+  address=$(hyprctl clients -j | \
+   jq -r --arg title "$machine" \
+    '[.[] | select(.class=="xfreerdp" and .title==$title)] | .[0].address // ""')
+   hyprctl dispatch focuswindow "address:$address"
+}
+
+case $1 in
+    monitor)monitor;;
+    toggle) toggle;;
+    focus) focus;;
+esac

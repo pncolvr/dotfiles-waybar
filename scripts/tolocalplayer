@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+
+TOOlS=$(echo "$0" | xargs realpath | xargs dirname)/tools/functions
+# shellcheck source=/home/pncolvr/.config/waybar/scripts/tools/functions
+source "$TOOlS"
+
+TEMP_DIR="${XDG_RUNTIME_DIR:-${TMPDIR:-/tmp}}"
+FILE_TO_WATCH="$TEMP_DIR/tolocalplayerlogs"
+
+if [[ ! -f "$FILE_TO_WATCH" ]]; then
+    touch "$FILE_TO_WATCH"
+fi
+
+last_line_seen=""
+function check() {
+    
+    if [[ -f "$FILE_TO_WATCH" && -s "$FILE_TO_WATCH" ]]; then 
+        lastline=$(tail -n 1 "$FILE_TO_WATCH")
+        if [[ "$lastline" != "$last_line_seen" ]]; then
+            last_line_seen="$lastline"
+            if [[ $lastline =~ Detected\ advertisement\ break\ of\ ([0-9]+)\ seconds ]]; then
+                secs=${BASH_REMATCH[1]}
+                ms=$((secs * 1000))
+                echo -n "$ms" "Ad break: ${secs}s" > "$TEMP_DIR/hypr_notifications"
+            fi
+        fi
+        lastlines=$(tail -n 30 "$FILE_TO_WATCH")
+        respondWithIcon "" "" "$lastlines" "playing"
+    else
+        # if [[ "$(isRunning)" == true ]]; then
+        #     respondWithIcon "" "" "" "playing"
+        # else
+            # shellcheck disable=2119
+            respond
+        # fi
+    fi
+}
+
+function isRunning() {
+    procInfo=$(pgrep -f "$HOME/Projects/scripts/utils/vivaldi/tolocalplayer.sh")
+    if [[ -z "$procInfo" ]]; then
+        echo false
+    else 
+        echo true
+    fi
+}
+
+function monitor(){
+    check
+    while true; do
+        if inotifywait -q -t 15 -e modify,delete,move "$FILE_TO_WATCH" 2>/dev/null; then
+            check
+        else
+            check
+        fi
+    done
+}
+
+monitor

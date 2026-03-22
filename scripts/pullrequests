@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+TOOlS=$(echo "$0" | xargs realpath | xargs dirname)/tools/functions
+# shellcheck source=/home/pncolvr/.config/waybar/scripts/tools/functions
+. "$TOOlS"
+
+FILE="$HOME"/.cache/waybar/pullrequest/repos
+
+function update() {
+
+  data=$(gh api graphql -f query="
+  {
+    search(query: \"is:pr is:open org:Bizdocs\", type: ISSUE, first: 100) {
+      issueCount
+      nodes {
+        ... on PullRequest {
+          repository {
+            name
+          }
+        }
+      }
+    }
+  }" 2>/dev/null)
+
+  total=$(echo "$data" | jq '.data.search.issueCount')
+  repos=$(echo "$data" | jq -r '.data.search.nodes[].repository.name' | sort -u)
+
+  echo "$repos" > "$FILE"
+
+  respondWithIcon "" "$total" "$repos"
+}
+
+function open(){
+  while read -r repo; do
+    cd "$HOME"/Projects/bizdocs/repos/"$repo" || exit 0
+    xdg-open "https://github.com/$(git remote get-url origin | sed -E "s#.*github.com[:/](.*)\.git#\1#")/pulls"
+  done < "$HOME"/.cache/waybar/pullrequest/repos
+}
+
+case $1 in
+  update)update;;
+  open)open;;
+  *) exit 0;;
+esac 

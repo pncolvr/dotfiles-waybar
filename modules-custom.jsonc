@@ -1,0 +1,183 @@
+{
+    "custom/tray-toggle": {
+        "format": "<span font='Font Awesome 7 Free'></span>",
+        "tooltip": false
+    },
+    "custom/scripts-toggle": {
+        "format": "<span font='Font Awesome 7 Free'></span>",
+        "tooltip": false
+    },
+    "custom/monitor-toggle": {
+        "format": "<span font='Font Awesome 7 Free'></span>",
+        "tooltip": false
+    },
+    "custom/work-toggle": {
+        "format": "<span font='Font Awesome 7 Free'></span>",
+        "tooltip": false
+    },
+    "custom/apps-toggle": {
+        "format": "<span font='Font Awesome 7 Free'>🗖</span>",
+        "tooltip": false
+    },
+    "custom/uxplay": {
+        "exec-on-event": true,
+        "interval": 60,
+        "return-type": "json",
+        "exec": "$HOME/.config/waybar/scripts/uxplay status",
+        "on-click": "$HOME/.config/waybar/scripts/uxplay toggle",
+        "tooltip-format": "uxplay"
+    },
+    "custom/colorpicker": {
+        "format": "<span font='Font Awesome 7 Free'></span>",
+        "on-click": "hyprpicker -an",
+        "tooltip-format": "colour picker"
+    },
+    "custom/currentdate": {
+        "format": "<span font='Font Awesome 7 Free'></span>",
+        "on-click": "$HOME/.config/waybar/scripts/currentdate",
+        "tooltip-format": "current date"
+    },
+    "custom/uuidgen": {
+        "format": "<span font='Font Awesome 7 Free'></span>",
+        "on-click": "$HOME/.config/waybar/scripts/uuidgen",
+        "tooltip-format": "generate guid"
+    },
+    "custom/genptvatid": {
+        "format": "<span font='Font Awesome 7 Free'></span>",
+        "on-click": "$HOME/.config/waybar/scripts/genptvatid",
+        "tooltip-format": "generate pt vat id"
+    },
+    "custom/ocr": {
+        "format": "<span font='Font Awesome 7 Free'></span>",
+        "on-click": "$HOME/Projects/scripts/utils/hyprland/screen/shot.sh ocr",
+        "tooltip-format": "read ocr"
+    },
+    "custom/qrcode": {
+        "format": "<span font='Font Awesome 7 Free'></span>",
+        "on-click": "$HOME/Projects/scripts/utils/hyprland/screen/shot.sh qrcode",
+        "tooltip-format": "read qrcode"
+    },
+    "custom/weather": {
+        "format": "{}°",
+        "tooltip": true,
+        "interval": 3600,
+        // "exec": "wttrbar --location Leiria --hide-conditions --lang pt",
+        "exec": "wttrbar --location Fatima --hide-conditions --lang pt",
+        "return-type": "json"
+    },
+    "custom/updates": {
+        "format": "{text}",
+        "exec": "$HOME/.config/waybar/scripts/updates",
+        "on-click": "kitty -e 'yay'",
+        "interval": 3600,
+        "markup":"pango",
+        "return-type": "json"
+    },
+    "custom/media#mpd": {
+        "format": "{text}",
+        "exec": "$HOME/.config/waybar/scripts/media mpd",
+        "return-type": "json",
+        "markup": "pango",
+        "on-click": "playerctl play-pause",
+        "on-scroll-up": "playerctl next",
+        "on-scroll-down": "playerctl previous",
+        "tooltip":true
+    },
+    "custom/screencast": {
+        "format": "{text}",
+        "exec": "$HOME/.config/waybar/scripts/screencast",
+        "return-type": "json",
+        "markup": "pango"
+    },
+    "custom/win11": {
+        "format": "<span font='Font Awesome 7 Free'></span>",
+        "exec": "$HOME/.config/waybar/scripts/win11 monitor",
+        "on-click": "$HOME/.config/waybar/scripts/win11 focus",
+        "on-click-right": "$HOME/.config/waybar/scripts/win11 toggle",
+        "return-type": "json",
+        "markup": "pango"
+    },
+    "custom/pullrequests": {
+        "exec": "$HOME/.config/waybar/scripts/pullrequests update",
+        "on-click": "$HOME/.config/waybar/scripts/pullrequests open",
+        "interval": 3600,
+        "return-type": "json",
+        "markup":"pango",
+        "tooltip": true
+    },
+    "custom/windows": {
+        "format":"{text}",
+        "exec": "$HOME/.config/waybar/scripts/windows/list list",
+        "on-click": "$HOME/.config/waybar/scripts/windows/list move-next",
+        "on-scroll-up":  "$HOME/.config/waybar/scripts/windows/list move-next",
+        "on-scroll-down":  "$HOME/.config/waybar/scripts/windows/list move-previous",
+        "on-click-right": "$HOME/.config/waybar/scripts/windows/list copy",
+        "return-type":"json",
+        "markup":"pango",
+        "signal": 1
+    },
+    "custom/activewindowhidden": {
+        "format":"{text}",
+        "exec": "$HOME/.config/waybar/scripts/windows/hidden",
+        "return-type":"json",
+        "markup":"pango",
+        "tooltip":false,
+        "signal": 1
+    },
+    "custom/activewindowfullscreen": {
+        "format":"{text}",
+        "exec": "$HOME/.config/waybar/scripts/windows/fullscreen",
+        "return-type":"json",
+        "markup":"pango",
+        "tooltip":false,
+        "signal": 1
+    },
+    "custom/n8nproxy": {
+        "exec-on-event": true,
+        "interval": 600,
+        "return-type": "json",
+        "exec": "$HOME/.config/waybar/scripts/n8nproxy status"
+    },
+    "custom/sql": {
+        "exec-on-event": true,
+        "interval": 600,
+        "return-type": "json",
+        "exec": "$HOME/.config/waybar/scripts/sql status"
+    },
+    "custom/notifications": {
+        "exec": "$HOME/.config/waybar/scripts/notifications status",
+        "on-click": "$HOME/.config/waybar/scripts/notifications open-panel",
+        "on-click-right": "$HOME/.config/waybar/scripts/notifications toggle",
+        "return-type":"json",
+        "signal": 2,
+        "interval": 60
+    },
+    "custom/twitch": {
+        "exec": "$HOME/.config/waybar/scripts/twitch",
+        "on-click": "$HOME/Projects/scripts/utils/browser/tolocalplayer.sh",
+        "return-type":"json",
+        "interval": 300
+    },
+    "custom/mpvtimeleft": {
+        "exec": "$HOME/.config/waybar/scripts/mpvtimeleft",
+        "interval": 1
+    },
+    "custom/separator": {
+        "format": "·",
+        "interval": "once",
+        "tooltip": false
+    },
+    "custom/tolocalplayer": {
+        "exec": "$HOME/.config/waybar/scripts/tolocalplayer",
+        "on-click": "hyprctl dispatch workspace 2",
+        "on-click-right": "hyprctl dismissnotify",
+        "return-type":"json"
+    },
+    "custom/mic": {
+        "exec": "$HOME/.config/waybar/scripts/mic status",
+        "on-click": "$HOME/.config/waybar/scripts/mic toggle",
+        "signal": 3,
+        "return-type":"json"
+    }
+}
+ 

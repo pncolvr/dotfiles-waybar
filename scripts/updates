@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+# reload waybar with: pkill -SIGUSR2 waybar
+# a sudo crontab was created with:
+# 0 * * * * /usr/bin/yay -Sy --noconfirm >/dev/null 2>&1
+
+TOOlS=$(echo "$0" | xargs realpath | xargs dirname)/tools/functions
+# shellcheck source=/home/pncolvr/.config/waybar/scripts/tools/functions
+source "$TOOlS"
+
+max=58
+
+mapfile -t updates < <(yay -Qu 2>/dev/null | sort)
+
+count=${#updates[@]}
+
+if [ "$count" -gt 0 ]; then
+    priority_patterns=(
+        "^linux"
+        "nvidia"
+        "^vivaldi"
+        "^steam"
+        "^firewall"
+        "^visual-studio-code-bin"
+        "^grub"
+        "^hypr"
+        "^streamcontroller"
+        "^signal"
+        "systemd"
+        "^waybar"
+    )
+    priority_pattern=$(IFS='|'; echo "${priority_patterns[*]}")
+
+    mapfile -t updates < <(
+        { printf '%s\n' "${updates[@]}" | grep -E "$priority_pattern";
+        printf '%s\n' "${updates[@]}" | grep -vE "$priority_pattern"; }
+    )
+    has_priority_update=$(printf '%s\n' "${updates[@]}" | grep -qE "$priority_pattern" && echo true || echo false)
+    
+    pkg_count=0
+    for pkg in "${updates[@]}"; do
+        if [[ $pkg_count -lt $max ]]; then
+            ((pkg_count+=1))
+            extra=$([[ "$pkg" =~ $priority_pattern ]] && echo 'foreground="#ce7a27"' || echo '')
+            tooltip+=$(printf '<span %s>%s</span>\r' "$extra" "$pkg")
+        fi
+    done
+    if [[ "$count" -gt "$max" ]]; then 
+        tooltip+="… and $((count - max)) more"
+    else 
+        tooltip="${tooltip::-1}"
+    fi
+
+    class=$([[ $has_priority_update == true ]] && echo "priority" || echo "")
+    respondWithIcon "" "" "$tooltip" "$class"
+else 
+    respondWithIcon "" "" "" "disabled"
+fi

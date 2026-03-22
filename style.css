@@ -1,0 +1,184 @@
+@define-color text #ffffff;
+@define-color background #000000;
+@define-color module-background #21222C;
+@define-color accent #6272a4;
+@define-color warning #FE8D59;
+@define-color inactive #808080;
+@define-color active #2E7D32;
+
+* {
+	font-family: "JetBrainsMono Nerd Font", sans-serif;
+	font-weight: bold;
+  color: @text;
+  font-size: 12px;
+}
+
+window#waybar {
+  background: @background;
+}
+
+tooltip {
+  background: @background;
+  opacity: 1;
+}
+
+#waybar {
+  margin: 0 0;
+}
+
+.module {
+  margin-right: 3px;
+}
+
+#taskbar button,
+#workspaces button {
+  border-radius: 0;
+  padding: 0em 0em;
+  margin: 0 0;
+  min-width: 10px;
+  min-height: 10px;
+  border: none;
+  border-top: 1px solid transparent;
+}
+
+#workspaces button label {
+  color: @text;
+}
+
+#taskbar button.active,
+#workspaces button.active {
+  background: @background;
+  border-top-color: @accent;
+}
+
+#workspaces button.active label {
+  color: @accent;
+  font-size: 14px;
+}
+
+#workspaces button.urgent label {
+  color: @urgent;
+  font-size: 14px;
+}
+
+#taskbar button.urgent,
+#workspaces button.urgent,
+#submap {
+  border-top-color: @warning;
+}
+
+#custom-twitch {
+  font-size: 14px;
+  color: #A970FF;
+}
+
+#custom-n8nproxy,
+#custom-sql,
+#custom-uxplay,
+#custom-separator {
+  color: @inactive;
+}
+
+#custom-pullrequests {
+  color: #58a6ff;
+}
+
+#custom-screencast {
+  padding-right: 3px;
+}
+
+#custom-windows.workspace-4 {
+  color: @inactive;
+  background-color: #252526;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  padding: 0 10px;
+  font-weight:bold;
+}
+
+#custom-windows.single,
+#custom-mpvtimeleft,
+#custom-activewindowhidden,
+#custom-activewindowfullscreen {
+  color: @accent;
+}
+
+#custom-updates.priority {
+  color: @warning;
+}
+
+#custom-updates.disabled, 
+#custom-twitch.disabled {
+  color: @inactive;
+}
+
+#custom-notifications.inactive {
+  color: @inactive;
+}
+
+#custom-screencast,
+#custom-media.playing,
+#custom-win11.booted,
+#custom-n8nproxy.enabled,
+#custom-uxplay.enabled,
+#custom-sql.enabled {
+  animation: pulseActiveColor 2s ease-in-out infinite;
+  animation-timing-function: steps(30);
+}
+
+@keyframes pulseActiveColor {
+  0%   { color: @text; }
+  50%  { color: @active; }
+  100% { color: @text; }
+}
+
+#custom-win11.booting,
+#custom-win11.stopping {
+  animation: pulseWarningColor 2s ease-in-out infinite;
+  animation-timing-function: steps(30);
+}
+
+@keyframes pulseWarningColor {
+  0%   { color: @text; }
+  50%  { color: @warning; }
+  100% { color: @text; }
+}
+
+#custom-win11.error {
+  color: red;
+}
+
+#custom-scripts-toggle,
+#custom-monitor-toggle,
+#custom-work-toggle,
+#custom-tray-toggle,
+#custom-apps-toggle,
+#custom-notifications {
+  padding: 0 4px;
+}
+
+
+#pulseaudio-slider {
+    padding: 5px 0;
+    margin: 0;
+}
+#pulseaudio-slider slider {
+    min-height: 0px;
+    min-width: 0px;
+    opacity: 0;
+    background-image: none;
+    border: none;
+    box-shadow: none;
+}
+#pulseaudio-slider trough {
+    min-height: 10px;
+    min-width: 4px;
+    border-radius: 5px;
+    background-color: black;
+}
+#pulseaudio-slider highlight {
+    min-width: 4px;
+    border-radius: 5px;
+    background-color: @accent;
+}
+

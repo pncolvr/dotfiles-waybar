@@ -1,0 +1,47 @@
+{
+  // criar ficheiro base e dois por monitor, cada um desses inclui o base e altera os modulos que faz display
+  "include": [
+    "$HOME/.config/waybar/groups.jsonc",
+    "$HOME/.config/waybar/modules.jsonc",
+    "$HOME/.config/waybar/modules-custom.jsonc"
+  ],
+  "layer": "top",
+  "position": "top",
+  "exclusive": true,
+  "passthrough": false,
+  "gtk-layer-shell": false,
+  "margin-left": 0,
+  "margin-right": 0,
+  "margin-top": 0,
+  "modules-left": [
+    "hyprland/workspaces",
+    "custom/separator",
+    "custom/windows",
+    "custom/activewindowhidden",
+    "custom/activewindowfullscreen"
+    // ,
+    // "custom/mpvtimeleft"
+  ],
+  "modules-center": [
+    "custom/updates",
+    "custom/separator",
+    "clock",
+    "custom/separator",
+    // "custom/tolocalplayer",
+    "custom/twitch"
+  ],
+  "modules-right": [
+    "custom/screencast",
+    // "custom/media#mpd",
+    // "custom/separator",
+    "custom/mic",
+    "group/pulseaudio",
+    "group/scripts",
+    // "group/monitor",
+    // "group/work",
+    // "group/apps",
+    "group/tray",
+    "custom/notifications"
+    // "custom/notifications"
+  ]
+}

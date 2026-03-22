@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+#!/usr/bin/env bash
+# reload waybar with: pkill -SIGUSR2 waybar
+# reload this module with: pkill -RTMIN+1 waybar
+TOOLS=$(dirname "$(dirname "$(realpath "$0")")")/tools/functions
+# shellcheck source=/home/pncolvr/.config/waybar/scripts/tools/functions
+source "$TOOLS"
+
+if hyprctl activewindow 2>/dev/null | grep -q 'pid'; then
+    current=$(hyprctl getprop activewindow no_screen_share 2>/dev/null)
+    if [[ "$current" == "true" ]]; then
+        respondWithIcon ""
+    fi
+fi
+

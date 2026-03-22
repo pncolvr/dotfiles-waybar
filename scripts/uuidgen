@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+TOOlS=$(echo "$0" | xargs realpath | xargs dirname)/tools/functions
+# shellcheck source=/home/pncolvr/.config/waybar/scripts/tools/functions
+source "$TOOlS"
+
+id=$(uuidgen)
+
+copy-to-clipboard-and-notify "$id"
