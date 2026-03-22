@@ -14,3 +14,9 @@ _or_ if we cloned the repo without the submodules
 ```shell
 git submodule update --init --recursive
 ```
+
+# Syncing submodules
+
+```shell
+git submodule sync --recursive
+```
