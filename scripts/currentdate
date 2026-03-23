@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-TOOlS=$(echo "$0" | xargs realpath | xargs dirname)/tools/functions
+TOOLS=$(echo "$0" | xargs realpath | xargs dirname)/tools/functions
 # shellcheck source=/home/pncolvr/.config/waybar/scripts/tools/functions
-source "$TOOlS"
+source "$TOOLS"
 
 value=$(date "+%Y-%m-%d") 
 copy_to_clipboard_and_notify "$value"

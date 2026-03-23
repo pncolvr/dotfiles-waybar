@@ -3,9 +3,9 @@
 # a sudo crontab was created with:
 # 0 * * * * /usr/bin/yay -Sy --noconfirm >/dev/null 2>&1
 
-TOOlS=$(echo "$0" | xargs realpath | xargs dirname)/tools/functions
+TOOLS=$(echo "$0" | xargs realpath | xargs dirname)/tools/functions
 # shellcheck source=/home/pncolvr/.config/waybar/scripts/tools/functions
-source "$TOOlS"
+source "$TOOLS"
 
 max=58
 
