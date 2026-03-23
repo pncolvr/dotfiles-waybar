@@ -1,18 +1,22 @@
 #!/usr/bin/env bash
 
+# set the following variables on the .env file for the vm you want
+# MACHINE_NAME=
+# MACHINE_IP=
+# MACHINE_PORT=
+
 TOOLS=$(echo "$0" | xargs realpath | xargs dirname)/tools/functions
 # shellcheck source=/home/pncolvr/.config/waybar/scripts/tools/functions
 source "$TOOLS"
+source "$(get_env_file "$0")"
 
 # shellcheck source=/home/pncolvr/Projects/scripts/rofi/remotes/serverup.sh
 source "$HOME"/Projects/scripts/rofi/remotes/serverup.sh
 
-machine="win11"
-port=3389
-endpoint=192.168.122.198
+
 TEMP_DIR="$(get_temp_dir)"
 
-FILE_TO_WATCH="$TEMP_DIR/${machine}_status"
+FILE_TO_WATCH="$TEMP_DIR/${MACHINE_NAME}_status"
 
 function recreate_file() {
     if [ ! -f "$FILE_TO_WATCH" ]; then
@@ -21,21 +25,21 @@ function recreate_file() {
 }
 
 function check() {
-    virshStatus=$(virsh -c qemu:///system list | grep "$machine" | awk '{ print $3 }')
+    virshStatus=$(virsh -c qemu:///system list | grep "$MACHINE_NAME" | awk '{ print $3 }')
     if [[ "$virshStatus" == "running" ]]; then
         STATUS=$(cat $FILE_TO_WATCH)
         case $STATUS in 
-            booting) respond "" "$machine booting" "booting";;
-            booted) respond "" "$machine booted" "booted";;
-            stopping) respond "" "$machine stopping" "stopping";;
-            error) respond "" "$machine couldnt connect" "error";;
-            *) respond "" "$machine stopped" "stopped";;
+            booting) respond "" "$MACHINE_NAME booting" "booting";;
+            booted) respond "" "$MACHINE_NAME booted" "booted";;
+            stopping) respond "" "$MACHINE_NAME stopping" "stopping";;
+            error) respond "" "$MACHINE_NAME couldnt connect" "error";;
+            *) respond "" "$MACHINE_NAME stopped" "stopped";;
         esac
     else
         status=$(cat "$FILE_TO_WATCH")
         if [[ ! "$status" == "stopped" ]]; then
             echo "stopped" >  "$FILE_TO_WATCH"
-            respond "" "$machine stopped" "stopped"
+            respond "" "$MACHINE_NAME stopped" "stopped"
         fi
     fi
 }
@@ -55,13 +59,13 @@ function monitor(){
 }
 
 function toggle() {
-    status=$(toggleVirtualMachine "$machine")
-    [[ $status == "starting" ]] && monitorVirtualMachine "$endpoint" "$port" "$machine"
+    status=$(toggleVirtualMachine "$MACHINE_NAME")
+    [[ $status == "starting" ]] && monitorVirtualMachine "$MACHINE_IP" "$MACHINE_PORT" "$MACHINE_NAME"
 }
 
 function focus() {
   address=$(hyprctl clients -j | \
-   jq -r --arg title "$machine" \
+   jq -r --arg title "$MACHINE_NAME" \
     '[.[] | select(.class=="xfreerdp" and .title==$title)] | .[0].address // ""')
    hyprctl dispatch focuswindow "address:$address"
 }
