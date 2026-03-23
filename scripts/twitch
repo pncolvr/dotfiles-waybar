@@ -1,54 +1,19 @@
 #!/usr/bin/env bash
-
 TOOlS=$(echo "$0" | xargs realpath | xargs dirname)/tools/functions
 # shellcheck source=/home/pncolvr/.config/waybar/scripts/tools/functions
 source "$TOOlS"
-
+source "$(get_env_file "$0")"
 ONLINE_FILE="$(get_temp_file_named twitch_online)"
+
 # generate new twitch token with twitch-cli token
 # expand followed section on twitch
 # and after on dev tools
-# copy(
-#   Array.from(document.querySelectorAll('a[data-test-selector="followed-channel"]'))
-#     .map(a => a.href)
-#     .join('\n')
-# );
+# let elements = [... document.querySelectorAll('div[aria-label="Followed Channels"] div.side-nav-card__title > p[data-a-target]')]
+# let names = elements.map(e => e.innerText.toLowerCase()).sort().join('\n')
+# copy(names)
+# then set TWITCH_USERS=(<result>) on the .env file
 
-users=(
-    anabitizi
-    ashmonsterftw
-    brodieongames
-    cohhcarnage
-    christitustech
-    denims
-    emiru
-    enemycharlie
-    harrie
-    iamelkas
-    joshstrifehayes
-    krysttl
-    leanbeefpatty
-    linustech
-    metatrongemini
-    missmikkaa
-    morgamix
-    oxillery
-    palmbee
-    pernillamouritzen_
-    pritkirin
-    ricfazeres
-    studytme
-    sweet_anita
-    taejen13
-    tectone
-    theprimeagen
-    whatever
-    yoon_froggy
-    zackrawrr
-)
-
-json=$(twitch-cli api get "streams?$(printf 'user_login=%s&' "${users[@]}")")
-
+json=$(twitch-cli api get "streams?$(printf 'user_login=%s&' "${TWITCH_USERS[@]}")")
 online_previous=""
 if [[ -f "$ONLINE_FILE" ]]; then
     online_previous=$(<"$ONLINE_FILE")
@@ -56,7 +21,7 @@ fi
 
 show=false
 true > "$ONLINE_FILE"
-for user in "${users[@]}"; do
+for user in "${TWITCH_USERS[@]}"; do
     if echo "$json" | jq -e --arg u "$user" '.data[] | select(.user_login == $u)' >/dev/null 2>&1; then
         viewer_count=$(echo "$json" | jq -e --arg u "$user" '.data[] | select(.user_login == $u) | .viewer_count')
         online+=$(printf '<span %s>%s - %s</span>\r' 'foreground="#A970FF"' "$user" "$viewer_count")

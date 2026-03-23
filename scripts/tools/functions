@@ -33,3 +33,10 @@ function get_temp_file_named() {
   local name=$1
   echo "$(get_temp_dir)/${name}_$(id -u)"
 }
+
+function get_env_file() {
+    local path=$1
+    local filename=$(basename "$path")
+    filename="${filename%.*}"
+    echo "$(dirname "$path")/$filename.env"
+}
