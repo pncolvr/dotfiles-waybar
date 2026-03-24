@@ -7,7 +7,7 @@ TOOLS=$(echo "$0" | xargs realpath | xargs dirname)/tools/functions
 # shellcheck source=/home/pncolvr/.config/waybar/scripts/tools/functions
 source "$TOOLS"
 
-max=58
+MAX=80
 
 mapfile -t updates < <(yay -Qu 2>/dev/null | sort)
 
@@ -31,21 +31,15 @@ if [ "$count" -gt 0 ]; then
     priority_pattern=$(IFS='|'; echo "${priority_patterns[*]}")
 
     mapfile -t updates < <(
-        { printf '%s\n' "${updates[@]}" | grep -E "$priority_pattern";
-        printf '%s\n' "${updates[@]}" | grep -vE "$priority_pattern"; }
+        { 
+            printf '<span foreground="#ce7a27">%s</span>\r\n' "${updates[@]}" | grep -E "$priority_pattern";
+            printf '<span>%s</span>\r\n' "${updates[@]}" | grep -vE "$priority_pattern";
+        }
     )
     has_priority_update=$(printf '%s\n' "${updates[@]}" | grep -qE "$priority_pattern" && echo true || echo false)
-    
-    pkg_count=0
-    for pkg in "${updates[@]}"; do
-        if [[ $pkg_count -lt $max ]]; then
-            ((pkg_count+=1))
-            extra=$([[ "$pkg" =~ $priority_pattern ]] && echo 'foreground="#ce7a27"' || echo '')
-            tooltip+=$(printf '<span %s>%s</span>\r' "$extra" "$pkg")
-        fi
-    done
-    if [[ "$count" -gt "$max" ]]; then 
-        tooltip+="… and $((count - max)) more"
+    tooltip=$(printf '%s\n' "${updates[@]}" | head --lines $MAX )
+    if [[ "$count" -gt "$MAX" ]]; then 
+        tooltip+="… and $((count - MAX)) more"
     else 
         tooltip="${tooltip::-1}"
     fi
