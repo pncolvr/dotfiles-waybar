@@ -3,37 +3,26 @@
 # a sudo crontab was created with:
 # 0 * * * * /usr/bin/yay -Sy --noconfirm >/dev/null 2>&1
 
+# set the following variables on the .env file
+# MAX=
+# FOREGROUND_COLOUR=
+# PRIORITY_PATTERNS=()
+
 TOOLS=$(echo "$0" | xargs realpath | xargs dirname)/tools/functions
 # shellcheck source=/home/pncolvr/.config/waybar/scripts/tools/functions
 source "$TOOLS"
-
-MAX=80
+source "$(get_env_file "$0")"
 
 mapfile -t updates < <(yay -Qu 2>/dev/null | sort)
 
 count=${#updates[@]}
 
 if [ "$count" -gt 0 ]; then
-    priority_patterns=(
-        "^linux"
-        "nvidia"
-        "^vivaldi"
-        "^steam"
-        "^firewall"
-        "^visual-studio-code-bin"
-        "^grub"
-        "^hypr"
-        "^streamcontroller"
-        "^signal"
-        "systemd"
-        "^waybar"
-    )
-    priority_pattern=$(IFS='|'; echo "${priority_patterns[*]}")
-
+    priority_pattern=$(IFS='|'; echo "${PRIORITY_PATTERNS[*]}")
     mapfile -t updates < <(
         { 
-            printf '<span foreground="#ce7a27">%s</span>\r\n' "${updates[@]}" | grep -E "$priority_pattern";
-            printf '<span>%s</span>\r\n' "${updates[@]}" | grep -vE "$priority_pattern";
+            printf '%s\n' "${updates[@]}" | grep -E "$priority_pattern" | xargs -I{} printf '<span foreground="%s">%s</span>\r\n' "$FOREGROUND_COLOUR" '{}';
+            printf '%s\n' "${updates[@]}" | grep -vE "$priority_pattern" | xargs -I{} printf '<span>%s</span>\r\n' '{}';
         }
     )
     has_priority_update=$(printf '%s\n' "${updates[@]}" | grep -qE "$priority_pattern" && echo true || echo false)
