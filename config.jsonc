@@ -17,7 +17,8 @@
     "custom/separator",
     "custom/windows",
     "custom/activewindowhidden",
-    "custom/activewindowfullscreen"
+    "custom/activewindowfullscreen",
+    "custom/activewindowpinned"
   ],
   "modules-center": [
     "custom/updates",

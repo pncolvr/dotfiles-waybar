@@ -92,7 +92,8 @@ tooltip {
 
 #custom-windows.single,
 #custom-activewindowhidden,
-#custom-activewindowfullscreen {
+#custom-activewindowfullscreen,
+#custom-activewindowpinned {
   color: @accent;
 }
 
