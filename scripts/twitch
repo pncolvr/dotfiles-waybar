@@ -30,7 +30,7 @@ for user in "${TWITCH_USERS[@]}"; do
             notification+="$user\n"
         fi
         show=true
-        printf '"%s"="%s"\n' "$user" "https://www.twitch.tv/$user" >> "$ONLINE_FILE"
+        printf '"%s"="%s"\n' "🟣 $user" "https://www.twitch.tv/$user" >> "$ONLINE_FILE"
     else
         offline+=$(printf '<span %s>%s</span>\r' 'foreground="#FFFFFF"' "$user")
     fi
