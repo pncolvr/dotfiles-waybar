@@ -10,8 +10,7 @@ TOOLS=$(echo "$0" | xargs realpath | xargs dirname)/tools/functions
 source "$TOOLS"
 source "$(get_env_file "$0")"
 
-# shellcheck source=/home/pncolvr/Projects/scripts/rofi/remotes/handle-virtual-machine.sh
-source "$HOME"/Projects/scripts/rofi/remotes/handle-virtual-machine.sh
+source "$HOME"/.config/rofi/scripts/remotes/handle-virtual-machine.sh
 
 
 TEMP_DIR="$(get_temp_dir)"
