@@ -10,8 +10,8 @@ TOOLS=$(echo "$0" | xargs realpath | xargs dirname)/tools/functions
 source "$TOOLS"
 source "$(get_env_file "$0")"
 
-# shellcheck source=/home/pncolvr/Projects/scripts/rofi/remotes/serverup.sh
-source "$HOME"/Projects/scripts/rofi/remotes/serverup.sh
+# shellcheck source=/home/pncolvr/Projects/scripts/rofi/remotes/handle-virtual-machine.sh
+source "$HOME"/Projects/scripts/rofi/remotes/handle-virtual-machine.sh
 
 
 TEMP_DIR="$(get_temp_dir)"
@@ -59,8 +59,8 @@ function monitor(){
 }
 
 function toggle() {
-    status=$(toggleVirtualMachine "$MACHINE_NAME")
-    [[ $status == "starting" ]] && monitorVirtualMachine "$MACHINE_IP" "$MACHINE_PORT" "$MACHINE_NAME"
+    status=$(toggle_virtual_machine "$MACHINE_NAME")
+    [[ $status == "starting" ]] && monitor_virtual_machine "$MACHINE_IP" "$MACHINE_PORT" "$MACHINE_NAME"
 }
 
 function focus() {
