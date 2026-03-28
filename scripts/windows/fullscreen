@@ -7,11 +7,9 @@ TOOLS=$(dirname "$(dirname "$(realpath "$0")")")/tools/functions
 # shellcheck source=/home/pncolvr/.config/waybar/scripts/tools/functions
 source "$TOOLS"
 
-if hyprctl activewindow 2>/dev/null | grep -q 'pid'; then
-    current=$(hyprctl activewindow -j | jq '.fullscreen' 2>/dev/null)
-    case $current in
-        1) respond_with_icon "" "" "" "";;
-        2|3) respond_with_icon "" "" "" "";;
-    esac
-fi
+current=$(hyprctl activewindow -j | jq '.fullscreen' 2>/dev/null)
+case $current in
+    1) respond_with_icon "" "" "" "";;
+    2|3) respond_with_icon "" "" "" "";;
+esac
 
