@@ -13,6 +13,12 @@ TOOLS=$(echo "$0" | xargs realpath | xargs dirname)/tools/functions
 source "$TOOLS"
 source "$(get_env_file "$0")"
 ONLINE_FILE="$(get_temp_file_named twitch_online)"
+TEMPLATE_JSON='{
+    "prompt": "",
+    "action": "output",
+    "allowTyped": false,
+    "sort": false
+}'
 
 json=$(twitch-cli api get "streams?$(printf 'user_login=%s&' "${TWITCH_USERS[@]}")")
 online_previous=""
@@ -20,6 +26,7 @@ if [[ -f "$ONLINE_FILE" ]]; then
     online_previous=$(<"$ONLINE_FILE")
 fi
 
+json_items=()
 show=false
 true > "$ONLINE_FILE"
 for user in "${TWITCH_USERS[@]}"; do
@@ -30,11 +37,18 @@ for user in "${TWITCH_USERS[@]}"; do
             notification+="$user\n"
         fi
         show=true
-        printf '"%s"="%s"\n' "🟣 $user" "https://www.twitch.tv/$user" >> "$ONLINE_FILE"
+        json_items+=("$(jq -cn --arg title " $user" --arg result "https://www.twitch.tv/$user" '{title: $title, result: $result}')")
     else
         offline+=$(printf '<span %s>%s</span>\r' 'foreground="#FFFFFF"' "$user")
     fi
 done
+
+if [ ${#json_items[@]} -gt 0 ]; then
+    items_json=$(printf '%s\n' "${json_items[@]}" | jq -s '.')
+    final_json=$(jq -n --argjson items "$items_json" --argjson template "$TEMPLATE_JSON" '$template + {items: $items}')
+    echo "$final_json" > "$ONLINE_FILE"
+fi
+
 tooltip+=$online
 tooltip+=$offline
 tooltip="${tooltip%$'\r'}"
