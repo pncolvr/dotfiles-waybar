@@ -19,14 +19,14 @@ count=${#updates[@]}
 
 if [ "$count" -gt 0 ]; then
     priority_pattern=$(IFS='|'; echo "${PRIORITY_PATTERNS[*]}")
-    mapfile -t updates < <(
+    mapfile -t update_spans < <(
         { 
             printf '%s\n' "${updates[@]}" | grep -E "$priority_pattern" | xargs -I{} printf '<span foreground="%s">%s</span>\r\n' "$FOREGROUND_COLOUR" '{}';
             printf '%s\n' "${updates[@]}" | grep -vE "$priority_pattern" | xargs -I{} printf '<span>%s</span>\r\n' '{}';
         }
     )
     has_priority_update=$(printf '%s\n' "${updates[@]}" | grep -qE "$priority_pattern" && echo true || echo false)
-    tooltip=$(printf '%s\n' "${updates[@]}" | head --lines $MAX )
+    tooltip=$(printf '%s\n' "${update_spans[@]}" | head --lines $MAX )
     if [[ "$count" -gt "$MAX" ]]; then 
         tooltip+="… and $((count - MAX)) more"
     else 
