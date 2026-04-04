@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-#!/usr/bin/env bash
 # reload waybar with: pkill -SIGUSR2 waybar
 # reload this module with: pkill -RTMIN+1 waybar
 TOOLS=$(dirname "$(dirname "$(realpath "${BASH_SOURCE[0]:-0}")")")/tools/functions

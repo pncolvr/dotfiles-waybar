@@ -134,7 +134,7 @@ tooltip {
   0%   { color: @text; }
   50%  { color: @warning; }
   100% { color: @text; }
-}
+} 
 
 #custom-win11.error {
   color: red;
@@ -145,10 +145,17 @@ tooltip {
 #custom-work-toggle,
 #custom-tray-toggle,
 #custom-apps-toggle,
-#custom-notifications {
+#custom-notifications,
+#custom-hyprlandsubmap {
   padding: 0 4px;
 }
 
+#custom-hyprlandsubmap{
+  background-color: @accent;
+  color: @text;
+  border-radius: 5px;
+  margin-left: 4px;
+}
 
 #pulseaudio-slider {
     padding: 5px 0;

@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# reload waybar with: pkill -SIGUSR2 waybar
+# reload this module with: pkill -RTMIN+4 waybar
+
+TOOLS=$(dirname "${BASH_SOURCE[0]:-0}")/tools/functions
+source "$TOOLS"
+
+current=$(hyprctl submap -j | jq -r '.' 2>/dev/null)
+
+if [[ "$current" == "default" ]]; then
+    respond
+fi
+respond "<span>$current</span>"

@@ -114,6 +114,14 @@
         "tooltip":false,
         "signal": 1
     },
+    "custom/hyprlandsubmap": {
+        "format":"{text}",
+        "exec": "$HOME/.config/waybar/scripts/submap",
+        "return-type":"json",
+        "markup":"pango",
+        "tooltip":false,
+        "signal": 4
+    },
     "custom/notifications": {
         "exec": "$HOME/.config/waybar/scripts/notifications status",
         "on-click": "$HOME/.config/waybar/scripts/notifications open-panel",

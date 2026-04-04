@@ -29,6 +29,7 @@
   ],
   "modules-right": [
     "custom/screencast",
+    "custom/hyprlandsubmap",
     "custom/mic",
     "group/pulseaudio",
     "group/scripts",
