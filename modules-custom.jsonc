@@ -115,10 +115,9 @@
         "signal": 1
     },
     "custom/hyprlandsubmap": {
-        "format":"{text}",
+        "format": "{text}",
         "exec": "$HOME/.config/waybar/scripts/submap",
         "return-type":"json",
-        "markup":"pango",
         "tooltip":false,
         "signal": 4
     },

@@ -150,11 +150,10 @@ tooltip {
   padding: 0 4px;
 }
 
-#custom-hyprlandsubmap{
-  background-color: @accent;
-  color: @text;
+#custom-hyprlandsubmap {
+  color: @warning;
+  font-weight: bolder;
   border-radius: 5px;
-  margin-left: 4px;
 }
 
 #pulseaudio-slider {
