@@ -14,7 +14,7 @@ toggle() {
     then
         killall uxplay & disown
     else
-        nohup uxplay -p -n "NotAnApple" >/dev/null &
+        nohup uxplay >/dev/null &
     fi
 }
 
