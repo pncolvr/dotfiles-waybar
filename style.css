@@ -5,6 +5,7 @@
 @define-color warning #FE8D59;
 @define-color inactive #808080;
 @define-color active #2E7D32;
+@define-color urgent #B80F0A;
 
 * {
 	font-family: "JetBrainsMono Nerd Font", sans-serif;
@@ -84,8 +85,7 @@ tooltip {
 #custom-windows.workspace-4 {
   color: @inactive;
   background-color: #252526;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+  border-radius: 5px 5px 0 0;
   padding: 0 10px;
   font-weight:bold;
 }
@@ -137,7 +137,7 @@ tooltip {
 } 
 
 #custom-win11.error {
-  color: red;
+  color: @urgent;
 }
 
 #custom-scripts-toggle,
@@ -151,9 +151,11 @@ tooltip {
 }
 
 #custom-hyprlandsubmap {
-  color: @warning;
+  background: @urgent;
+  color: @text;
   font-weight: bolder;
   border-radius: 5px;
+  border: 2px solid @background;
 }
 
 #pulseaudio-slider {
