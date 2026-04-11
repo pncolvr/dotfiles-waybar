@@ -1,7 +1,7 @@
 #!/bin/bash
 # reload waybar with: pkill -SIGUSR2 waybar
 # reload this module with: pkill -RTMIN+3 waybar
-TOOLS=$(echo "${BASH_SOURCE[0]:-0}" | xargs realpath | xargs dirname)/tools/functions
+TOOLS=$(dirname "${BASH_SOURCE[0]:-0}")/tools/functions
 # shellcheck source=/home/pncolvr/.config/waybar/scripts/tools/functions
 source "$TOOLS"
 
@@ -39,7 +39,20 @@ function mic_is_muted() {
     echo "$ALL_MUTED"
 }
 
-SOURCE_IDS=$(wpctl status | awk '/Sources:/,/Sinks:/' | grep 'PRO X 2 LIGHTSPEED Mono' | grep '^\s*│  \*' | awk '{print $3}' | tr -d '.')
+function get_sources() {
+    while true
+    do 
+        local ids=$(wpctl status | awk '/Sources:/,/Sinks:/' | grep 'PRO X 2 LIGHTSPEED Mono' | awk '{print $3}' | tr -d '.')
+        if [[ -n "$ids" ]]; then
+            echo -n "$ids"
+            return 
+        else 
+            sleep 0.1
+        fi
+    done
+}
+
+SOURCE_IDS=$(get_sources)
 case $1 in 
     toggle) toggle;;
     status) status;;
