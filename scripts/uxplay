@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-TOOLS=$(echo "${BASH_SOURCE[0]:-0}" | xargs realpath | xargs dirname)/tools/functions
+TOOLS=$(dirname "${BASH_SOURCE[0]:-0}")/tools/functions
 # shellcheck source=/home/pncolvr/.config/waybar/scripts/tools/functions
 . "$TOOLS"
 

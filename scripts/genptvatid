@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-TOOLS="$(echo "${BASH_SOURCE[0]:-0}" | xargs realpath | xargs dirname)"/tools
+TOOLS="$(dirname "${BASH_SOURCE[0]:-0}")"/tools
 source "$TOOLS"/functions
 
 id=$("$TOOLS"/genptvatid.cs)
