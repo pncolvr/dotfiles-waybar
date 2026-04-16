@@ -1,4 +1,5 @@
 {
+    // TODO: move what makes sense out of here and modules-custom.jsonc
     "group/scripts": {
         "orientation": "inherit",
         "drawer": {
@@ -28,31 +29,6 @@
         "modules": [
             "custom/tray-toggle",
             "tray"
-        ]
-    },
-    "group/apps": {
-        "orientation": "inherit",
-        "drawer": {
-            "transition-duration": 100,
-            "children-class": "custom-apps",
-            "transition-left-to-right": true
-        },
-        "modules": [
-            "custom/apps-toggle",
-            "custom/discord",
-            "custom/teams"
-        ]
-    },
-    "group/work": {
-        "orientation": "inherit",
-        "drawer": {
-            "transition-duration": 100,
-            "children-class": "custom-work",
-            "transition-left-to-right": true
-        },
-        "modules": [
-            "custom/work-toggle",
-            "custom/win11"
         ]
     },
     "group/pulseaudio": {
