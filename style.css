@@ -101,6 +101,10 @@ tooltip {
   color: @warning;
 }
 
+#custom-mic.disabled {
+  color: @urgent;
+}
+
 #custom-updates.disabled, 
 #custom-twitch.disabled {
   color: @inactive;

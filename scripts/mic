@@ -22,7 +22,7 @@ function toggle() {
 function status() {
     ALL_MUTED=$(mic_is_muted)
     if [ "$ALL_MUTED" = true ]; then
-        respond_with_icon ""
+        respond_with_icon "" "" "" "disabled"
     else
         respond_with_icon ""
     fi
