@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# reload waybar with: pkill -SIGUSR2 waybar
+# reload this module with: pkill -RTMIN+5 waybar
+TOOLS=$(dirname "${BASH_SOURCE[0]:-0}")/tools/functions
+# shellcheck source=/home/pncolvr/.config/waybar/scripts/tools/functions
+source "$TOOLS"
+
+source "$(get_env_file "${BASH_SOURCE[0]:-0}")"
+
+STATUS_SCRIPT=$ZDOTDIR/scripts/status-manager.sh
+
+function toggle() {
+    "$STATUS_SCRIPT" --toggle
+    reload
+}
+
+function check() {
+    local status
+    status=$("$STATUS_SCRIPT" --check)
+    local source
+    source=$("$STATUS_SCRIPT" --source)
+    if [[ "$status" == "$WORKING_STATE_NAME" ]]; then
+        respond_with_icon "" "" "$WORKING_STATE_NAME" "$source"
+    else 
+        respond_with_icon "" "" "$NOTWORKING_STATE_NAME" "$source"
+    fi
+}
+
+function clear() {
+    "$STATUS_SCRIPT" --clear
+    reload
+}
+
+function reload() {
+    pkill -RTMIN+5 waybar
+}
+
+case $1 in 
+    toggle) toggle;;
+    check) check;;
+    clear) clear;;
+esac

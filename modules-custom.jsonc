@@ -114,13 +114,6 @@
         "tooltip":false,
         "signal": 1
     },
-    "custom/hyprlandsubmap": {
-        "format": "{text}",
-        "exec": "$HOME/.config/waybar/scripts/submap",
-        "return-type":"json",
-        "tooltip":false,
-        "signal": 4
-    },
     "custom/notifications": {
         "exec": "$HOME/.config/waybar/scripts/notifications status",
         "on-click": "$HOME/.config/waybar/scripts/notifications open-panel",
@@ -145,6 +138,20 @@
         "on-click": "$HOME/.config/waybar/scripts/mic toggle",
         "signal": 3,
         "return-type":"json"
+    },
+    "custom/hyprlandsubmap": {
+        "format": "{text}",
+        "exec": "$HOME/.config/waybar/scripts/submap",
+        "return-type":"json",
+        "tooltip":false,
+        "signal": 4
+    },
+    "custom/status": {
+        "exec": "$HOME/.config/waybar/scripts/status check",
+        "on-click": "$HOME/.config/waybar/scripts/status toggle",
+        "on-click-right": "$HOME/.config/waybar/scripts/status clear",
+        "return-type": "json",
+        "signal": 5
     }
 }
  

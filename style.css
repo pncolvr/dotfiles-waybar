@@ -97,7 +97,8 @@ tooltip {
   color: @accent;
 }
 
-#custom-updates.priority {
+#custom-updates.priority,
+#custom-status.manual {
   color: @warning;
 }
 
@@ -106,10 +107,7 @@ tooltip {
 }
 
 #custom-updates.disabled, 
-#custom-twitch.disabled {
-  color: @inactive;
-}
-
+#custom-twitch.disabled,
 #custom-notifications.inactive {
   color: @inactive;
 }
