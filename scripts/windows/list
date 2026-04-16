@@ -115,7 +115,7 @@ function list_windows() {
         [[ -z "$client" ]] && continue
         IFS="|" read -r display_title address class title <<< "$client"
         if [[ ! $spans == "" ]]; then
-            spans+="<span>∣ </span>"
+            spans+="<span>⸱</span>"
         fi
         spans+=$(echo -n "<span $(handle_selected "$address" "$current_address")>$display_title</span> ")
     done
