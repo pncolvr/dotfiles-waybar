@@ -7,7 +7,7 @@ source "$TOOLS"
 
 source "$(get_env_file "${BASH_SOURCE[0]:-0}")"
 
-STATUS_SCRIPT=$ZDOTDIR/scripts/status-manager.sh
+STATUS_SCRIPT=$ZDOTDIR/scripts/status/manager.sh
 
 function toggle() {
     "$STATUS_SCRIPT" --toggle
