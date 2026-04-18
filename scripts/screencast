@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-
+# reload waybar with: pkill -SIGUSR2 waybar
+# reload this module with: pkill -RTMIN+6 waybar
 TOOLS=$(dirname "${BASH_SOURCE[0]:-0}")/tools/functions
 # shellcheck source=/home/pncolvr/.config/waybar/scripts/tools/functions
 source "$TOOLS"
@@ -19,7 +20,7 @@ function check() {
 }
 
 function on_no_screencast() {
-    : 
+    respond
 }
 
 function on_screencast() {
@@ -27,8 +28,3 @@ function on_screencast() {
 }
 
 check
-while true; do
-    inotifywait -m -e modify,delete,move "$FILE_TO_WATCH" 2>/dev/null | while read -r _; do
-        check
-    done
-done

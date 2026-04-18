@@ -3,22 +3,6 @@
         "format": "<span font='Font Awesome 7 Free'></span>",
         "tooltip": false
     },
-    "custom/scripts-toggle": {
-        "format": "<span font='Font Awesome 7 Free'></span>",
-        "tooltip": false
-    },
-    "custom/monitor-toggle": {
-        "format": "<span font='Font Awesome 7 Free'></span>",
-        "tooltip": false
-    },
-    "custom/work-toggle": {
-        "format": "<span font='Font Awesome 7 Free'></span>",
-        "tooltip": false
-    },
-    "custom/apps-toggle": {
-        "format": "<span font='Font Awesome 7 Free'>🗖</span>",
-        "tooltip": false
-    },
     "custom/updates": {
         "format": "{text}",
         "exec": "$HOME/.config/waybar/scripts/updates",
@@ -26,12 +10,6 @@
         "interval": 3600,
         "markup":"pango",
         "return-type": "json"
-    },
-    "custom/screencast": {
-        "format": "{text}",
-        "exec": "$HOME/.config/waybar/scripts/screencast",
-        "return-type": "json",
-        "markup": "pango"
     },
     "custom/windows": {
         "format":"{text}",
@@ -106,6 +84,12 @@
         "on-click-right": "$HOME/.config/waybar/scripts/status clear",
         "return-type": "json",
         "signal": 5
+    },
+    "custom/screencast": {
+        "format": "{text}",
+        "exec": "$HOME/.config/waybar/scripts/screencast",
+        "return-type": "json",
+        "signal": 6
     }
 }
  
