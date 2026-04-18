@@ -32,9 +32,8 @@
     "custom/hyprlandsubmap",
     "custom/mic",
     "group/pulseaudio",
-    "group/scripts",
-    "group/tray",
     "custom/status",
+    "group/tray",
     "custom/notifications"
   ]
 }

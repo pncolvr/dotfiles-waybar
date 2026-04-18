@@ -19,14 +19,6 @@
         "format": "<span font='Font Awesome 7 Free'>🗖</span>",
         "tooltip": false
     },
-    "custom/uxplay": {
-        "exec-on-event": true,
-        "interval": 60,
-        "return-type": "json",
-        "exec": "$HOME/.config/waybar/scripts/uxplay status",
-        "on-click": "$HOME/.config/waybar/scripts/uxplay toggle",
-        "tooltip-format": "uxplay"
-    },
     "custom/updates": {
         "format": "{text}",
         "exec": "$HOME/.config/waybar/scripts/updates",
