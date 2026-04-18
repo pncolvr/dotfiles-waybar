@@ -12,19 +12,10 @@ if [[ ! -f "$FILE_TO_WATCH" ]]; then
 fi
 
 function check() {
-    STATUS=$(cat $FILE_TO_WATCH)
-    case $STATUS in
-        1) on_screencast ;;
-        *) on_no_screencast;;
-    esac
-}
-
-function on_no_screencast() {
-    respond
-}
-
-function on_screencast() {
-    respond "" "screensharing"
+    local status=$(cat $FILE_TO_WATCH)
+    if [[ "$status" -eq 1 ]]; then
+        respond "" "screensharing"
+    fi
 }
 
 check
