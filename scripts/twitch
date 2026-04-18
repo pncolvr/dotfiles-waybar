@@ -54,12 +54,16 @@ tooltip+=$online
 tooltip+=$offline
 tooltip="${tooltip%$'\r'}"
 notification="${notification%$'\r'}"
-if [[ $show == true ]]; then
-    if [ -n "$notification" ]; then 
-        title="Online"
-        notify-send --icon "$HOME"/Pictures/icons/twitch.png "$title" "$notification" --transient
-    fi
-    respond_with_icon "" "" "$tooltip" ""
-else
-    respond_with_icon "" "" "$tooltip" "disabled"
+icon=""
+text=
+class=
+
+if [[ ! $show ]]; then
+    class="disabled"
 fi
+
+if [ -n "$notification" ]; then 
+    notify-send --icon "$HOME"/Pictures/icons/twitch.png "Online" "$notification" --transient
+fi
+
+respond_with_icon "$icon" "$text" "$tooltip" "$class"

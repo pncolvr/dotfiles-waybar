@@ -16,6 +16,10 @@ source "$(get_env_file "${BASH_SOURCE[0]:-0}")"
 mapfile -t updates < <(yay -Qu 2>/dev/null | sort)
 
 count=${#updates[@]}
+icon=""
+text=
+tooltip=
+class=
 
 if [ "$count" -gt 0 ]; then
     priority_pattern=$(IFS='|'; echo "${PRIORITY_PATTERNS[*]}")
@@ -34,7 +38,8 @@ if [ "$count" -gt 0 ]; then
     fi
 
     class=$([[ $has_priority_update == true ]] && echo "priority" || echo "")
-    respond_with_icon "" "" "$tooltip" "$class"
 else 
-    respond_with_icon "" "" "" "disabled"
+    class=disabled
 fi
+
+respond_with_icon "$icon" "$text" "$tooltip" "$class"

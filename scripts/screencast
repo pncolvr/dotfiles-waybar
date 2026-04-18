@@ -19,7 +19,7 @@ function check() {
 }
 
 function on_no_screencast() {
-    respond
+    : 
 }
 
 function on_screencast() {

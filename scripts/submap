@@ -8,7 +8,6 @@ source "$TOOLS"
 
 current=$(hyprctl submap -j | jq -r '.' 2>/dev/null)
 
-if [[ "$current" == "default" ]]; then
-    respond
+if [[ "$current" != "default" ]]; then
+    respond "$current"
 fi
-respond "$current"

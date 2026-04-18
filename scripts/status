@@ -15,15 +15,18 @@ function toggle() {
 }
 
 function check() {
-    local status
+    local status source icon text tooltip class
     status=$("$STATUS_SCRIPT" --check)
-    local source
     source=$("$STATUS_SCRIPT" --source)
+    class="$source"
     if [[ "$status" == "$WORKING_STATE_NAME" ]]; then
-        respond_with_icon "" "" "$WORKING_STATE_NAME" "$source"
+        icon=""
+        tooltip="$WORKING_STATE_NAME"
     else 
-        respond_with_icon "" "" "$NOTWORKING_STATE_NAME" "$source"
+        icon=""
+        tooltip="$NOTWORKING_STATE_NAME"
     fi
+    respond_with_icon "$icon" "$text" "$tooltip" "$class"
 }
 
 function clear() {

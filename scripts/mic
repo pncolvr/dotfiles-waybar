@@ -6,8 +6,8 @@ TOOLS=$(dirname "${BASH_SOURCE[0]:-0}")/tools/functions
 source "$TOOLS"
 
 function toggle() {
-    ALL_MUTED=$(mic_is_muted)
-    if [ "$ALL_MUTED" = true ]; then
+    local muted=$(mic_is_muted)
+    if [ "$muted" = true ]; then
         for SRC in $SOURCE_IDS; do
             wpctl set-mute "$SRC" 0
         done
@@ -20,23 +20,27 @@ function toggle() {
 }
 
 function status() {
-    ALL_MUTED=$(mic_is_muted)
-    if [ "$ALL_MUTED" = true ]; then
-        respond_with_icon "" "" "" "disabled"
+    local muted icon text tooltip class
+    muted=$(mic_is_muted)
+    if [ "$muted" = true ]; then
+        icon=""
+        class="disabled"
     else
-        respond_with_icon ""
+        icon=""
     fi
+    respond_with_icon "$icon" "$text" "$tooltip" "$class"
+
 }
 
 function mic_is_muted() {
-    ALL_MUTED=true
+    local muted=true
     for SRC in $SOURCE_IDS; do
         if ! wpctl get-volume "$SRC" | grep -q "MUTED"; then
-            ALL_MUTED=false
+            muted=false
             break
         fi
     done
-    echo "$ALL_MUTED"
+    echo "$muted"
 }
 
 function get_sources() {
