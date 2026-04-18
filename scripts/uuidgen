@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-TOOLS=$(dirname "${BASH_SOURCE[0]:-0}")/tools/functions
-# shellcheck source=/home/pncolvr/.config/waybar/scripts/tools/functions
-source "$TOOLS"
-
-id=$(uuidgen)
-copy_to_clipboard_and_notify "$id"

@@ -27,36 +27,6 @@
         "on-click": "$HOME/.config/waybar/scripts/uxplay toggle",
         "tooltip-format": "uxplay"
     },
-    "custom/colorpicker": {
-        "format": "<span font='Font Awesome 7 Free'></span>",
-        "on-click": "hyprpicker -an",
-        "tooltip-format": "colour picker"
-    },
-    "custom/currentdate": {
-        "format": "<span font='Font Awesome 7 Free'></span>",
-        "on-click": "$HOME/.config/waybar/scripts/currentdate",
-        "tooltip-format": "current date"
-    },
-    "custom/uuidgen": {
-        "format": "<span font='Font Awesome 7 Free'></span>",
-        "on-click": "$HOME/.config/waybar/scripts/uuidgen",
-        "tooltip-format": "generate guid"
-    },
-    "custom/genptvatid": {
-        "format": "<span font='Font Awesome 7 Free'></span>",
-        "on-click": "$HOME/.config/waybar/scripts/genptvatid",
-        "tooltip-format": "generate pt vat id"
-    },
-    "custom/ocr": {
-        "format": "<span font='Font Awesome 7 Free'></span>",
-        "on-click": "$HOME/.config/hypr/scripts/screen/shot.sh ocr",
-        "tooltip-format": "read ocr"
-    },
-    "custom/qrcode": {
-        "format": "<span font='Font Awesome 7 Free'></span>",
-        "on-click": "$HOME/.config/hypr/scripts/screen/shot.sh qrcode",
-        "tooltip-format": "read qrcode"
-    },
     "custom/updates": {
         "format": "{text}",
         "exec": "$HOME/.config/waybar/scripts/updates",
@@ -68,14 +38,6 @@
     "custom/screencast": {
         "format": "{text}",
         "exec": "$HOME/.config/waybar/scripts/screencast",
-        "return-type": "json",
-        "markup": "pango"
-    },
-    "custom/win11": {
-        "format": "<span font='Font Awesome 7 Free'></span>",
-        "exec": "$HOME/.config/waybar/scripts/win11 monitor",
-        "on-click": "$HOME/.config/waybar/scripts/win11 focus",
-        "on-click-right": "$HOME/.config/waybar/scripts/win11 toggle",
         "return-type": "json",
         "markup": "pango"
     },

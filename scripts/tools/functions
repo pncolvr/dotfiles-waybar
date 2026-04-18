@@ -19,12 +19,6 @@ function respond() {
     respond_with_icon "" "$text" "$tooltip" "$class"
 }
 
-function copy_to_clipboard_and_notify() {
-    local text="$1"
-    notify-send --expire-time=2000 "$text copied to clipboard" --transient
-    echo -n "$text" | wl-copy
-}
-
 function get_temp_dir() {
     echo "${XDG_RUNTIME_DIR:-/tmp}"
 }

@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-TOOLS="$(dirname "${BASH_SOURCE[0]:-0}")"/tools
-source "$TOOLS"/functions
-
-id=$("$TOOLS"/genptvatid.cs)
-copy_to_clipboard_and_notify "$id"

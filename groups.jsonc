@@ -9,14 +9,7 @@
         },
         "modules": [
             "custom/scripts-toggle",
-            "custom/colorpicker",
-            "custom/uuidgen",
-            "custom/currentdate",
-            "custom/genptvatid",
-            "custom/qrcode",
-            "custom/ocr",
-            "custom/uxplay",
-            "custom/win11"
+            "custom/uxplay"
         ]
     },
     "group/tray": {
