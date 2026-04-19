@@ -35,7 +35,7 @@
     },
     "cpu": {
         "interval": 1,
-        "format": "{icon0}",
+        "format": "{icon}",
         "format-icons": [
             "<span color='#69ff94'>▁</span>",
             "<span color='#2aa9ff'>▂</span>",
@@ -48,7 +48,7 @@
         ]
     },
     "memory": {
-        "interval": 60,
+        "interval": 1,
         "format": "{used:0.1f}G"
     },
     "power-profiles-daemon": {
