@@ -31,7 +31,8 @@
         "tooltip-format": "{volume}%"
     },
     "pulseaudio": {
-        "tooltip": false
+        "tooltip": true,
+        "on-click": "amixer set Master toggle"
     },
     "cpu": {
         "interval": 1,
@@ -44,7 +45,7 @@
             "<span color='#ffffa5'>▅</span>",
             "<span color='#ffffa5'>▆</span>",
             "<span color='#ff9977'>▇</span>",
-            "<span color='#dd532e'>█</span>" 
+            "<span color='#dd532e'>█</span>"
         ]
     },
     "memory": {
@@ -62,7 +63,7 @@
             "power-saver": ""
         }
     },
-     "temperature": {
+    "temperature": {
         "format": "{temperatureC}°C"
     }
 }

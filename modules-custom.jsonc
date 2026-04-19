@@ -89,7 +89,7 @@
         "return-type": "json",
         "signal": 5
     },
-    "custom/screencast": {
+    "custom/screencast": { // TODO: check if I can configure the privacy module in a way that I like
         "format": "{text}",
         "exec": "$HOME/.config/waybar/scripts/screencast",
         "return-type": "json",
