@@ -6,7 +6,7 @@ function respond_with_icon() {
     local tooltip="$3"
     local class="$4"
     if [[ -n "$icon" ]]; then
-        text="<span font='Font Awesome 7 Free'>$icon</span>$text"
+        text="<span font='Font Awesome 7 Free Solid'>$icon</span>$text"
     fi
     jq -cn --arg text "$text" --arg tooltip "$tooltip" --arg class "$class" '({text:$text, tooltip:$tooltip, class:$class} | with_entries(select(.value != null and .value != "")))'
 }

@@ -1,6 +1,15 @@
 {
+    "custom/separator": {
+        "format": "·",
+        "interval": "once",
+        "tooltip": false
+    },
     "custom/tray-toggle": {
-        "format": "<span font='Font Awesome 7 Free'></span>",
+        "format": "<span font='Font Awesome 7 Free Solid'></span>",
+        "tooltip": false
+    },
+    "custom/usage-toggle": {
+        "format": "<span font='Font Awesome 7 Free Solid'></span>",
         "tooltip": false
     },
     "custom/updates": {
@@ -59,11 +68,6 @@
         "on-click": "$HOME/.config/hypr/scripts/tolocalplayer.sh",
         "return-type":"json",
         "interval": 300
-    },
-    "custom/separator": {
-        "format": "·",
-        "interval": "once",
-        "tooltip": false
     },
     "custom/mic": {
         "exec": "$HOME/.config/waybar/scripts/mic status",

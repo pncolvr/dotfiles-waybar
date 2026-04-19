@@ -11,6 +11,24 @@
             "tray"
         ]
     },
+    "group/usage": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 100,
+            "children-class": "custom-usage",
+            "transition-left-to-right":true
+        },
+        "modules": [
+            "custom/usage-toggle",
+            "power-profiles-daemon",
+            "custom/separator",
+            "memory",
+            "custom/separator",
+            "cpu",
+            "custom/separator",
+            "temperature"
+        ]
+    },
     "group/pulseaudio": {
         "orientation": "inherit",
         "drawer": {

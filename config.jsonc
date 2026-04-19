@@ -33,7 +33,8 @@
     "custom/mic",
     "group/pulseaudio",
     "group/tray",
-    "custom/status",
-    "custom/notifications"
+    "group/usage",
+    "custom/notifications",
+    "custom/status"
   ]
 }
