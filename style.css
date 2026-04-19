@@ -73,11 +73,6 @@ tooltip {
   color: #A970FF;
 }
 
-#custom-uxplay,
-#custom-separator {
-  color: @inactive;
-}
-
 #custom-screencast {
   padding-right: 3px;
 }
@@ -102,6 +97,11 @@ tooltip {
   color: @warning;
 }
 
+#custom-mic {
+  color: @text;
+  transition: color 0.2s steps(30);
+}
+
 #custom-mic.disabled {
   color: @urgent;
 }
@@ -112,10 +112,7 @@ tooltip {
   color: @inactive;
 }
 
-#custom-screencast,
-#custom-media.playing,
-#custom-win11.booted,
-#custom-uxplay.enabled {
+#custom-screencast {
   animation: pulseActiveColor 2s ease-in-out infinite;
   animation-timing-function: steps(30);
 }
@@ -126,27 +123,6 @@ tooltip {
   100% { color: @text; }
 }
 
-#custom-win11.booting,
-#custom-win11.stopping {
-  animation: pulseWarningColor 2s ease-in-out infinite;
-  animation-timing-function: steps(30);
-}
-
-@keyframes pulseWarningColor {
-  0%   { color: @text; }
-  50%  { color: @warning; }
-  100% { color: @text; }
-} 
-
-#custom-win11.error {
-  color: @urgent;
-}
-
-#custom-scripts-toggle,
-#custom-monitor-toggle,
-#custom-work-toggle,
-#custom-tray-toggle,
-#custom-apps-toggle,
 #custom-notifications,
 #custom-hyprlandsubmap {
   padding: 0 4px;
