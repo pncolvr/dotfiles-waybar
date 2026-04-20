@@ -22,9 +22,12 @@ function check() {
     if [[ "$status" == "$WORKING_STATE_NAME" ]]; then
         icon=""
         tooltip="$WORKING_STATE_NAME"
-    else 
+    elif [[ "$status" == "$NOTWORKING_STATE_NAME" ]]; then
         icon=""
         tooltip="$NOTWORKING_STATE_NAME"
+    else
+        icon=""
+        tooltip="unknown"
     fi
     respond_with_icon "$icon" "$text" "$tooltip" "$class"
 }
