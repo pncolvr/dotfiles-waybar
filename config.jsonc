@@ -32,9 +32,9 @@
     "custom/hyprlandsubmap",
     "custom/mic",
     "group/pulseaudio",
-    "group/tray",
     "group/usage",
     "custom/notifications",
-    "custom/status"
+    "custom/status",
+    "group/tray"
   ]
 }
