@@ -28,7 +28,7 @@ tooltip {
 }
 
 .module {
-  margin-right: 3px;
+  margin-right: 5px;
 }
 
 #taskbar button,
@@ -71,10 +71,6 @@ tooltip {
 #custom-twitch {
   font-size: 14px;
   color: #A970FF;
-}
-
-#custom-screencast {
-  padding-right: 3px;
 }
 
 #custom-windows.workspace-4 {
@@ -123,11 +119,6 @@ tooltip {
   100% { color: @text; }
 }
 
-#custom-notifications,
-#custom-hyprlandsubmap {
-  padding: 0 4px;
-}
-
 #custom-hyprlandsubmap {
   background: @urgent;
   color: @text;
@@ -139,7 +130,9 @@ tooltip {
 #pulseaudio-slider {
     padding: 5px 0;
     margin: 0;
+    margin-right: 5px;
 }
+
 #pulseaudio-slider slider {
     min-height: 0px;
     min-width: 0px;
@@ -148,12 +141,14 @@ tooltip {
     border: none;
     box-shadow: none;
 }
+
 #pulseaudio-slider trough {
     min-height: 10px;
     min-width: 4px;
     border-radius: 5px;
     background-color: black;
 }
+
 #pulseaudio-slider highlight {
     min-width: 4px;
     border-radius: 5px;
