@@ -24,13 +24,14 @@
             "on-scroll-down": "shift_up"
         }
     },
-    "pulseaudio/slider": {
-        "min": 0,
-        "max": 100,
-        "orientation": "vertical",
-        "tooltip-format": "{volume}%"
+    "pulseaudio#icon": {
+        "format": "<span font='Font Awesome 7 Free Solid'>{icon}</span>",
+        "format-muted": "<span font='Font Awesome 7 Free Solid'></span>",
+        "format-icons": {
+            "default": ["", "", "", ""]
+        }
     },
-    "pulseaudio": {
+    "pulseaudio#percent": {
         "tooltip": true,
         "on-click": "amixer set Master toggle"
     },

@@ -93,11 +93,13 @@ tooltip {
   color: @warning;
 }
 
+#pulseaudio.icon,
 #custom-mic {
   color: @text;
   transition: color 0.2s steps(30);
 }
 
+#pulseaudio.icon.muted,
 #custom-mic.disabled {
   color: @urgent;
 }

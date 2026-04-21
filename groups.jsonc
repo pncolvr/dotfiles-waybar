@@ -37,8 +37,8 @@
             "transition-left-to-right": true
         },
         "modules": [
-            "pulseaudio/slider",
-            "pulseaudio"
+            "pulseaudio#icon",
+            "pulseaudio#percent"
         ]
     }
 }
