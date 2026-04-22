@@ -47,14 +47,6 @@
         "tooltip":false,
         "signal": 1
     },
-    "custom/activewindowpinned": {
-        "format":"{text}",
-        "exec": "$HOME/.config/waybar/scripts/windows/pinned",
-        "return-type":"json",
-        "markup":"pango",
-        "tooltip":false,
-        "signal": 1
-    },
     "custom/notifications": {
         "exec": "$HOME/.config/waybar/scripts/notifications status",
         "on-click": "$HOME/.config/waybar/scripts/notifications open-panel",
