@@ -9,7 +9,7 @@
 
 * {
 	font-family: "JetBrainsMono Nerd Font", sans-serif;
-	font-weight: bold;
+	font-weight: bolder;
   color: @text;
   font-size: 12px;
 }
@@ -54,12 +54,10 @@ tooltip {
 
 #workspaces button.active label {
   color: @accent;
-  font-size: 14px;
 }
 
 #workspaces button.urgent label {
   color: @urgent;
-  font-size: 14px;
 }
 
 #taskbar button.urgent,
@@ -69,7 +67,7 @@ tooltip {
 }
 
 #custom-twitch {
-  font-size: 14px;
+  font-size:14px;
   color: #A970FF;
 }
 
@@ -90,18 +88,19 @@ tooltip {
 
 #custom-updates.priority,
 #custom-status.manual {
-  color: @warning;
+  animation: pulseWarningColor 2s ease-in-out infinite;
+  animation-timing-function: steps(30);
 }
 
 #pulseaudio.icon,
 #custom-mic {
   color: @text;
-  transition: color 0.2s steps(30);
 }
 
 #pulseaudio.icon.muted,
 #custom-mic.disabled {
-  color: @urgent;
+  animation: pulseUrgentColor 2s ease-in-out infinite;
+  animation-timing-function: steps(30);
 }
 
 #custom-updates.disabled, 
@@ -115,45 +114,31 @@ tooltip {
   animation-timing-function: steps(30);
 }
 
+#custom-hyprlandsubmap {
+  background: @urgent;
+  color: @text;
+  padding: 1px 8px;
+  border-radius: 10px;
+  border: 4px solid @background;
+}
+
+
 @keyframes pulseActiveColor {
   0%   { color: @text; }
   50%  { color: @active; }
   100% { color: @text; }
 }
 
-#custom-hyprlandsubmap {
-  background: @urgent;
-  color: @text;
-  font-weight: bolder;
-  border-radius: 5px;
-  border: 2px solid @background;
+@keyframes pulseWarningColor {
+  0%   { color: @text; }
+  50%  { color: @warning; }
+  100% { color: @text; }
 }
 
-#pulseaudio-slider {
-    padding: 5px 0;
-    margin: 0;
-    margin-right: 5px;
+@keyframes pulseUrgentColor {
+  0%   { color: @text; }
+  50%  { color: @urgent; }
+  100% { color: @text; }
 }
 
-#pulseaudio-slider slider {
-    min-height: 0px;
-    min-width: 0px;
-    opacity: 0;
-    background-image: none;
-    border: none;
-    box-shadow: none;
-}
-
-#pulseaudio-slider trough {
-    min-height: 10px;
-    min-width: 4px;
-    border-radius: 5px;
-    background-color: black;
-}
-
-#pulseaudio-slider highlight {
-    min-width: 4px;
-    border-radius: 5px;
-    background-color: @accent;
-}
 
