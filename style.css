@@ -8,7 +8,7 @@
 @define-color urgent #B80F0A;
 
 * {
-	font-family: "JetBrainsMono Nerd Font", sans-serif;
+	font-family: "JetBrainsMonoNL-Bold", sans-serif;
 	font-weight: bolder;
   color: @text;
   font-size: 12px;
