@@ -66,5 +66,14 @@
     },
     "temperature": {
         "format": "{temperatureC}°C"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "tooltip-format-activated": "will not sleep",
+        "tooltip-format-deactivated": "will sleep",
+        "format-icons": {
+            "activated": "󰒳",
+            "deactivated": "󰒲"
+        }
     }
 }

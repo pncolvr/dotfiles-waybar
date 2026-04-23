@@ -22,6 +22,8 @@
             "custom/usage-toggle",
             "power-profiles-daemon",
             "custom/separator",
+            "idle_inhibitor",
+            "custom/separator",
             "memory",
             "custom/separator",
             "cpu",

@@ -40,7 +40,7 @@ function get_clean_title() {
             text="${text%" $pat"}"
         fi
     done
-    echo "${text:0:165}"
+    echo "${text:0:100}"
 }
 
 function escape_pango() {
