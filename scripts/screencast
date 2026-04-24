@@ -14,7 +14,7 @@ fi
 function check() {
     local status=$(cat $FILE_TO_WATCH)
     if [[ "$status" -eq 1 ]]; then
-        respond "" "screensharing"
+        respond_with_icon "" "" "screensharing"
     fi
 }
 

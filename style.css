@@ -62,9 +62,13 @@ window#waybar #workspaces button:hover label{
   text-decoration:underline;
 }
 
-#workspaces button.urgent,
-#submap {
-  border-top-color: @warning;
+#workspaces button.empty label {
+  color: @inactive;
+}
+
+#workspaces button.urgent label{
+  color: @warning;
+  text-decoration: underline;
 }
 
 #custom-twitch {
@@ -88,8 +92,7 @@ window#waybar #workspaces button:hover label{
 
 #custom-updates.priority,
 #custom-status.manual {
-  animation: pulseWarningColor 2s ease-in-out infinite;
-  animation-timing-function: steps(30);
+  color:@warning;
 }
 
 #pulseaudio.icon,
@@ -110,11 +113,12 @@ window#waybar #workspaces button:hover label{
 }
 
 #custom-screencast {
+  font-size: 14px;
   animation: pulseActiveColor 2s ease-in-out infinite;
   animation-timing-function: steps(30);
 }
 
-#custom-hyprlandsubmap {
+#submap {
   background: @urgent;
   color: @text;
   padding: 1px 8px;

@@ -67,13 +67,6 @@
         "signal": 3,
         "return-type":"json"
     },
-    "custom/hyprlandsubmap": {
-        "format": "{text}",
-        "exec": "$HOME/.config/waybar/scripts/submap",
-        "return-type":"json",
-        "tooltip":false,
-        "signal": 4
-    },
     "custom/status": {
         "exec": "$HOME/.config/waybar/scripts/status check",
         "on-click": "$HOME/.config/waybar/scripts/status toggle",

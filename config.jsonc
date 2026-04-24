@@ -28,7 +28,7 @@
     "custom/twitch"
   ],
   "modules-right": [
-    "custom/hyprlandsubmap",
+    "hyprland/submap",
     "custom/screencast",
     "custom/mic",
     "group/pulseaudio",

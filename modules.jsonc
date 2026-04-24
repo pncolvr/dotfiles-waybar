@@ -1,4 +1,12 @@
 {
+    "hyprland/workspaces": {
+        "format": "{id}",
+        "active-only": false
+    },
+    "hyprland/submap": {
+        "format": "{}",
+        "always-on": false
+    },
     "clock": {
         "format": "{:%Y-%m-%d %R}",
         "format-alt": "{:%Y-%m-%d %T}",
