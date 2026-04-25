@@ -4,7 +4,7 @@
 @define-color accent #6272a4;
 @define-color warning #FE8D59;
 @define-color inactive #b1b69c;
-@define-color inactive-workspace rgba(128, 128, 128, 0.30);
+@define-color barely-noticeable rgba(128, 128, 128, 0.30);
 @define-color active #2E7D32;
 @define-color urgent #B80F0A;
 
@@ -50,7 +50,7 @@ window#waybar #workspaces button:hover label{
 }
 
 #workspaces button label {
-  color: @text;
+  color: @inactive;
 }
 
 #workspaces button.active label {
@@ -62,7 +62,7 @@ window#waybar #workspaces button:hover label{
 }
 
 #workspaces button.empty label {
-  color: @inactive-workspace;
+  color: @barely-noticeable;
 }
 
 #custom-twitch {
@@ -110,6 +110,10 @@ window#waybar #workspaces button:hover label{
   font-size: 14px;
   animation: pulseActiveColor 2s ease-in-out infinite;
   animation-timing-function: steps(30);
+}
+
+#custom-separator {
+  color: @barely-noticeable;
 }
 
 #submap {
