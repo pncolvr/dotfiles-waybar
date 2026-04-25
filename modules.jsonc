@@ -1,7 +1,18 @@
 {
     "hyprland/workspaces": {
-        "format": "{id}",
-        "active-only": false
+        "format": "<span font='Font Awesome 7 Free Solid'>{icon}</span>",
+        "format-icons": {
+            "1": "",
+            "2": "",
+            "3": "",
+            "4": "",
+            "5": "",
+            "6": "",
+            "7": "",
+            "8": "",
+            "9": "",
+            "10": ""
+        }
     },
     "hyprland/submap": {
         "format": "{}",
