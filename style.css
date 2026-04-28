@@ -3,7 +3,7 @@
 @define-color module-background #21222C;
 @define-color accent #6272a4;
 @define-color warning #FE8D59;
-@define-color inactive #b1b69c;
+@define-color inactive #808080;
 @define-color barely-noticeable rgba(128, 128, 128, 0.30);
 @define-color active #2E7D32;
 @define-color urgent #B80F0A;
@@ -30,6 +30,7 @@ tooltip {
 
 .module {
   margin-right: 5px;
+  background: @background;
 }
 
 #workspaces button {
@@ -50,19 +51,20 @@ window#waybar #workspaces button:hover label{
 }
 
 #workspaces button label {
-  color: @inactive;
+  color: rgba(255, 255, 255, 0.6);
 }
 
-#workspaces button.active label {
-  color: @accent;
+#workspaces button.empty label {
+  color: @barely-noticeable;
 }
 
 #workspaces button.urgent label {
   color: @warning;
 }
 
-#workspaces button.empty label {
-  color: @barely-noticeable;
+
+#workspaces button.active label {
+  color: @accent;
 }
 
 #custom-twitch {
@@ -101,8 +103,7 @@ window#waybar #workspaces button:hover label{
 }
 
 #custom-updates.disabled, 
-#custom-twitch.disabled,
-#custom-notifications.inactive {
+#custom-twitch.disabled {
   color: @inactive;
 }
 
@@ -142,5 +143,3 @@ window#waybar #workspaces button:hover label{
   50%  { color: @urgent; }
   100% { color: @text; }
 }
-
-
