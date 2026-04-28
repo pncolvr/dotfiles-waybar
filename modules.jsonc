@@ -2,15 +2,15 @@
     "hyprland/workspaces": {
         "format": "<span font='Font Awesome 7 Free Solid'>{icon}</span>",
         "format-icons": {
-            "1": "",
-            "2": "",
+            "1": "",
+            "2": "",
             "3": "",
             "4": "",
             "5": "",
             "6": "",
             "7": "",
-            "8": "",
-            "9": "",
+            "8": "#",
+            "9": "",
             "10": ""
         }
     },
@@ -77,9 +77,9 @@
         "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
         "tooltip": true,
         "format-icons": {
-            "default": "",
+            "default": "",
             "performance": "",
-            "balanced": "",
+            "balanced": "",
             "power-saver": ""
         }
     },
