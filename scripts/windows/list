@@ -250,7 +250,7 @@ function move_next_special_workspace_window() {
 
     [[ -z "$next_address" ]] && return 0
 
-    hyprctl dispatch focuswindow "address:$next_address" >/dev/null
+    hyprctl dispatch 'hl.dsp.focus({ window = "address:'"$next_address"'" })' >/dev/null
 }
 
 function move_prev_special_workspace_window() {
@@ -270,7 +270,7 @@ function move_prev_special_workspace_window() {
 
     [[ -z "$prev_address" ]] && return 0
 
-    hyprctl dispatch focuswindow "address:$prev_address" >/dev/null
+    hyprctl dispatch 'hl.dsp.focus({ window = "address:'"$prev_address"'" })' >/dev/null
 }
 
 function active_window_has_group() {
@@ -288,11 +288,11 @@ function handle_move_next() {
     fi
 
     if active_window_has_group; then
-        hyprctl dispatch changegroupactive f >/dev/null
+        hyprctl dispatch 'hl.dsp.group.next()' >/dev/null
         return 0
     fi
 
-    hyprctl dispatch cyclenext tiled >/dev/null
+    hyprctl dispatch 'hl.dsp.window.cycle_next({ tiled = true })' >/dev/null
 }
 
 function move_next() {
@@ -321,11 +321,11 @@ function handle_move_prev() {
     fi
 
     if active_window_has_group; then
-        hyprctl dispatch changegroupactive b >/dev/null
+        hyprctl dispatch 'hl.dsp.group.prev()' >/dev/null
         return 0
     fi
 
-    hyprctl dispatch cyclenext prev tiled >/dev/null
+    hyprctl dispatch 'hl.dsp.window.cycle_next({ next = false, tiled = true })' >/dev/null
 }
 
 function move_prev() {
