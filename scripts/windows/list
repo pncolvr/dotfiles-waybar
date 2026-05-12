@@ -18,11 +18,11 @@ function get_active_workspace() {
 }
 
 function get_cursor_no_warps() {
-    hyprctl getoption cursor:no_warps -j 2>/dev/null | jq -r '.int // 0'
+    hyprctl getoption cursor:no_warps -j 2>/dev/null | jq -r '.bool // false'
 }
 
 function set_cursor_no_warps() {
-    hyprctl keyword cursor:no_warps "$1" >/dev/null
+    hyprctl eval "hl.config({ cursor = { no_warps = $1 } })" >/dev/null
 }
 
 function is_special_workspace() {
@@ -300,7 +300,7 @@ function move_next() {
     local status
 
     original_no_warps=$(get_cursor_no_warps)
-    set_cursor_no_warps 1
+    set_cursor_no_warps true
 
     handle_move_next
     status=$?
@@ -333,7 +333,7 @@ function move_prev() {
     local status
 
     original_no_warps=$(get_cursor_no_warps)
-    set_cursor_no_warps 1
+    set_cursor_no_warps true
 
     handle_move_prev
     status=$?
