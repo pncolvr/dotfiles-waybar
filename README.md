@@ -1,3 +1,7 @@
+> **Archived:** This project is no longer maintained as of May 2026.</br>
+> It remains available for reference and personal use.</br>
+> Successor project: https://github.com/pncolvr/dotfiles-quickshell
+
 # Info
 
 This is my personal daily driver waybar configuration that I use for personal and work activities.
